@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:myattrs="http://schemas.android.com/apk/res/com.hzuhelper"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5FFF5"
+    android:orientation="vertical" >
+
+    <com.hzuhelper.wedget.TopBarLinearLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        myattrs:centerTextViewText="课程列表"
+        myattrs:leftButtonBg="@drawable/img_btn_menu" /> 
+
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@null" >
+    </ListView>
+
+</LinearLayout>

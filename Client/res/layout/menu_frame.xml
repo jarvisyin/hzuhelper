@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menu_list"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerVertical="true"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:paddingLeft="4dip"
+    android:paddingRight="10dip" >
+
+    <RelativeLayout
+        android:id="@+id/rll_menu_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dip"
+        android:background="@drawable/btn_selector"
+        android:padding="8dip" >
+
+        <ImageView
+            android:id="@+id/iv_user_head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/img_menu_personal_head" />
+
+        <TextView
+            android:id="@+id/tv_user_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/iv_user_head"
+            android:padding="4dip"
+            android:text="@string/nickname"
+            android:textColor="#686868"
+            android:textSize="17sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_user_nickname"
+            android:layout_below="@+id/tv_user_nickname"
+            android:padding="4dip"
+            android:text="@string/personIntro"
+            android:textColor="#727272"
+            android:textSize="13sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/img_menu_tv_bg" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_menu_course"
+        style="@style/menu_frame_btn"
+        android:text="@string/wodekebiao" />
+
+    <Button
+        android:id="@+id/btn_menu_score"
+        style="@style/menu_frame_btn"
+        android:text="@string/wodechengji" />
+
+    <Button
+        android:id="@+id/btn_menu_chat_tweet"
+        style="@style/menu_frame_btn"
+        android:text="@string/huidashudong" />
+
+    <Button
+        android:id="@+id/btn_menu_takeout"
+        style="@style/menu_frame_btn"
+        android:visibility="gone"
+        android:text="@string/huidawaimai" />
+
+</LinearLayout>

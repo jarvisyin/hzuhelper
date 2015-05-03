@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>惠大校园助手</title>
+<meta name="keywords" content="惠大校园助手" />
+<meta name="keywords" content="查成绩" />
+<meta name="keywords" content="查课表" />
+<meta name="keywords" content="惠大树洞" />
+<meta name="description" content="查课表？查成绩？心情郁闷想吐槽？惠大校园助手是您最好的选择" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="shortcut icon" href="css/image/logo2.png">
+<style type="text/css">
+body {
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<img alt="惠大校园助手" usemap="#planetmap" id="image_main"
+		src="http://hzuhelper-huzhelper.stor.sinaapp.com/indexbg.jpg" />
+	<map name="planetmap" id="planetmap">
+		<area id="area1" shape="rect" coords="0,0,1100,2600"
+			href="http://hzuhelper-huzhelper.stor.sinaapp.com/hzuhelper.apk" target="_blank"
+			alt="Sun" />
+	</map>
+	<script type="text/javascript" language="javascript">
+		window.onload = myfun;
+		function myfun() {
+			var width = document.body.clientWidth;
+			var height = document.body.clientHeight;
+
+			var img_width = 1437;
+			var img_height = 850;
+			var rant;
+			var image_mian = document.getElementById("image_main");
+			if ((width / height) > (img_width / img_height)) {
+				rant = (height / img_height);
+				image_mian.height = height;
+				image_mian.width = img_width * rant;
+			} else {
+				rant = (width / img_width);
+				image_mian.height = img_height * rant;
+				image_mian.width = width;
+			}
+			var aim = (601 * rant) + "," + (471 * rant) + "," + (879 * rant)
+					+ "," + (599 * rant);
+
+			document.getElementById("area1").coords = aim;
+		}
+	</script>
+</body>
+</html>

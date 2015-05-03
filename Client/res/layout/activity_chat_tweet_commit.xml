@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:myattrs="http://schemas.android.com/apk/res/com.hzuhelper"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.hzuhelper.wedget.TopBarLinearLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        myattrs:centerTextViewText="内容发布"
+        myattrs:leftButtonBg="@drawable/img_btn_back"
+        myattrs:rightButtonText="确定" /> 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/topbar"
+        android:background="@color/white" >
+
+        <EditText
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autoLink="web"
+            android:background="@color/white"
+            android:gravity="top"
+            android:imeOptions="actionDone"
+            android:inputType="textMultiLine"
+            android:lineSpacingExtra="6.0dp"
+            android:paddingBottom="20.0dp"
+            android:paddingLeft="10.0dp"
+            android:paddingRight="10.0dp"
+            android:paddingTop="10.0dp"
+            android:textColor="@color/black"
+            android:textSize="16.0sp" />
+
+        <TextView
+            android:id="@+id/tv_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="right"
+            android:padding="10.0dp"
+            android:text="@string/contentLen"
+            android:textColor="@color/black"
+            android:textSize="12.0sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

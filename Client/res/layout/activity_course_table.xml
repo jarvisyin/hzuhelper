@@ -1,0 +1,40 @@
+﻿<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:myattrs="http://schemas.android.com/apk/res/com.hzuhelper"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentRight="true"
+    android:background="#D7D7D7"
+    android:orientation="vertical"
+    android:visibility="visible" >
+
+    <com.hzuhelper.wedget.TopBarLinearLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        myattrs:centerTextViewText="我的课程"
+        myattrs:leftButtonBg="@drawable/img_btn_menu"
+        myattrs:rightButtonText="一键导入" /> 
+
+    <LinearLayout
+        android:id="@+id/llo_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:id="@+id/llo_courseTable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

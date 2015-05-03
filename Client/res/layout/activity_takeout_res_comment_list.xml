@@ -1,0 +1,25 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:myattrs="http://schemas.android.com/apk/res/com.hzuhelper"
+    android:id="@+id/rll_tweetList"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorF5F5F5" >
+
+    <com.hzuhelper.wedget.TopBarLinearLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        myattrs:centerTextViewText="@string/dianpupingjia"
+        myattrs:leftButtonBg="@drawable/img_btn_back" />
+
+    <com.hzuhelper.wedget.RefreshAbleListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/chat_footbar"
+        android:layout_below="@id/topbar"
+        android:divider="@null" />
+
+</RelativeLayout>

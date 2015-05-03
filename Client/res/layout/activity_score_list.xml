@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:myattrs="http://schemas.android.com/apk/res/com.hzuhelper"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0f0e0"
+    android:orientation="vertical" >
+
+    <com.hzuhelper.wedget.TopBarLinearLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        myattrs:centerTextViewText="成绩列表"
+        myattrs:leftButtonBg="@drawable/img_btn_menu" /> 
+
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topbar"
+        android:divider="@null" >
+    </ListView>
+
+    <Button
+        android:id="@+id/tv_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/shape_score_tv_msg_bg"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_15" />
+
+</RelativeLayout>

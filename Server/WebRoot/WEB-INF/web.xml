@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	<!-- filter -->
+	<filter>
+		<display-name>GrobleFilter</display-name>
+		<filter-name>GrobleFilter</filter-name>
+		<filter-class>com.hzuhelper.Filter.GrobleFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>GrobleFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>ManaFilter</filter-name>
+		<filter-class>com.hzuhelper.Filter.ManaFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>ManaFilter</filter-name>
+		<url-pattern>/manager/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+	</filter-mapping>
+	<filter>
+		<filter-name>JspFilter</filter-name>
+		<filter-class>com.hzuhelper.Filter.JspFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>JspFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+	<filter>
+		<filter-name>StaticFilter</filter-name>
+		<filter-class>com.hzuhelper.Filter.StaticFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>StaticFilter</filter-name>
+		<url-pattern>*.html</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+	</filter-mapping>
+
+	<filter>
+		<display-name>AppUserFilter</display-name>
+		<filter-name>AppUserFilter</filter-name>
+		<filter-class>com.hzuhelper.Filter.AppUserFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>AppUserFilter</filter-name>
+		<url-pattern>/appserver/*</url-pattern>
+	</filter-mapping>
+
+	<!-- filter -->
+
+
+	<!-- servlet-appserver -->
+	<servlet>
+		<servlet-name>UsersRegister</servlet-name>
+		<servlet-class>com.hzuhelper.Control.UserRegister</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UsersRegister</servlet-name>
+		<url-pattern>/users/register</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>UsersLogin</servlet-name>
+		<servlet-class>com.hzuhelper.Control.UserLogin</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UsersLogin</servlet-name>
+		<url-pattern>/users/login</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>CourseGetList</servlet-name>
+		<servlet-class>com.hzuhelper.Control.CourseGetList</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CourseGetList</servlet-name>
+		<url-pattern>/appserver/course/get</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ClientInit</servlet-name>
+		<servlet-class>com.hzuhelper.Control.ClientInit</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ClientInit</servlet-name>
+		<url-pattern>/appserver/clientinit</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ChatTweetGetList</servlet-name>
+		<servlet-class>com.hzuhelper.Control.ChatTweetGetList</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChatTweetGetList</servlet-name>
+		<url-pattern>/appserver/chat/tweet/getlist</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ChatCommentGetList1</servlet-name>
+		<servlet-class>com.hzuhelper.Control.ChatCommentGetList1</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChatCommentGetList1</servlet-name>
+		<url-pattern>/appserver/chat/comment/getlist1</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ChatTweetCommit</servlet-name>
+		<servlet-class>com.hzuhelper.Control.ChatTweetCommit</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChatTweetCommit</servlet-name>
+		<url-pattern>/appserver/chat/tweet/commit</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ChatCommentCommit</servlet-name>
+		<servlet-class>com.hzuhelper.Control.ChatCommentCommit</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChatCommentCommit</servlet-name>
+		<url-pattern>/appserver/chat/comment/commit</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ChatCommentGetList2</servlet-name>
+		<servlet-class>com.hzuhelper.Control.ChatCommentGetList2</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChatCommentGetList2</servlet-name>
+		<url-pattern>/appserver/chat/comment/getlist2</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>MenuRestaurantGetList</servlet-name>
+		<servlet-class>com.hzuhelper.Control.MenuRestaurantGetList</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MenuRestaurantGetList</servlet-name>
+		<url-pattern>/appserver/menu/restaurantgetlist</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>MenuItemGetList</servlet-name>
+		<servlet-class>com.hzuhelper.Control.MenuItemGetList</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MenuItemGetList</servlet-name>
+		<url-pattern>/appserver/menu/itemgetlist</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>TakeoutResCommentCommit</servlet-name>
+		<servlet-class>com.hzuhelper.Control.TakeoutResCommentCommit</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TakeoutResCommentCommit</servlet-name>
+		<url-pattern>/appserver/takeout/restaurant/comment/commit</url-pattern>
+	</servlet-mapping>
+	<!-- servlet-appserver -->
+
+
+	<!-- servlet-website -->
+	<servlet>
+		<description></description>
+		<display-name>APPDownload</display-name>
+		<servlet-name>APPDownload</servlet-name>
+		<servlet-class>com.hzuhelper.Control.APPDownload</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>APPDownload</servlet-name>
+		<url-pattern>/appdownload/android</url-pattern>
+	</servlet-mapping>
+	<!-- servlet-website -->
+
+	<!-- servlet-manager -->
+	<servlet>
+		<servlet-name>ManaLogin</servlet-name>
+		<servlet-class>com.hzuhelper.Control.ManaLogin</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ManaLogin</servlet-name>
+		<url-pattern>/appserver/manager/login</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ManaUser</servlet-name>
+		<servlet-class>com.hzuhelper.Control.ManaUser</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ManaUser</servlet-name>
+		<url-pattern>/appserver/manager/user</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ManaTakeoutRes</servlet-name>
+		<servlet-class>com.hzuhelper.Control.ManaTakeoutRes</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ManaTakeoutRes</servlet-name>
+		<url-pattern>/appserver/manager/takeoutres</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ManaTakeoutMenu</servlet-name>
+		<servlet-class>com.hzuhelper.Control.ManaTakeoutMenu</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ManaTakeoutMenu</servlet-name>
+		<url-pattern>/appserver/manager/takeoutmenu</url-pattern>
+	</servlet-mapping>
+	<!-- servlet-manager -->
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>

@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:myattrs="http://schemas.android.com/apk/res/com.hzuhelper"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0f0f0"
+    android:orientation="vertical" >
+
+    <com.hzuhelper.wedget.TopBarLinearLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        myattrs:centerTextViewText="查看课程"
+        myattrs:leftButtonBg="@drawable/img_btn_back"
+        myattrs:rightButtonText="编辑" /> 
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="20dip"
+        android:background="@drawable/shape_course_show"
+        android:padding="10dip" >
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dip" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dip"
+                android:text="@string/courseName"
+                android:textColor="#646464" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:ems="10"
+                android:textSize="16sp" >
+            </TextView>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dip" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dip"
+                android:text="@string/courseSite"
+                android:textColor="#646464" />
+
+            <TextView
+                android:id="@+id/Site"
+                android:layout_width="wrap_content"
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dip" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dip"
+                android:text="@string/courseTeacher"
+                android:textColor="#646464" />
+
+            <TextView
+                android:id="@+id/Teacher"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dip" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dip"
+                android:text="@string/courseTime"
+                android:textColor="#646464" />
+
+            <TextView
+                android:id="@+id/Time"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dip" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dip"
+                android:text="@string/courseTerm"
+                android:textColor="#646464" />
+
+            <TextView
+                android:id="@+id/Termtime"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+        </TableRow>
+    </TableLayout>
+
+    <Button
+        android:id="@+id/btn_delete"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dip"
+        android:background="@drawable/shape_btn_red"
+        android:padding="10dip"
+        android:text="@string/btn_delete"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+</LinearLayout>

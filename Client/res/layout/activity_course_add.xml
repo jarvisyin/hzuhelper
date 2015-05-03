@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:myattrs="http://schemas.android.com/apk/res/com.hzuhelper"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.hzuhelper.wedget.TopBarLinearLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        myattrs:centerTextViewText="添加课程"
+        myattrs:leftButtonBg="@drawable/img_btn_back"
+        myattrs:rightButtonText="添加" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:padding="10dip" >
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_top_corner_no_bottom_line"
+            android:padding="10dip" >
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_weight="2"
+                android:background="@null"
+                android:singleLine="true"
+                android:text="@string/courseName"
+                android:textColor="#646464" />
+
+            <EditText
+                android:id="@+id/Name"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:ems="10"
+                android:inputType="text" >
+            </EditText>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_no_corner_without_bottom"
+            android:padding="10dip" >
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_weight="2"
+                android:background="@null"
+                android:singleLine="true"
+                android:text="@string/courseSite"
+                android:textColor="#646464" />
+
+            <EditText
+                android:id="@+id/Site"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:ems="10"
+                android:inputType="text" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dip"
+            android:background="@drawable/shape_bottom_corner_no_top_line"
+            android:padding="10dip" >
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_weight="2"
+                android:background="@null"
+                android:singleLine="true"
+                android:text="@string/courseTeacher"
+                android:textColor="#646464" />
+
+            <EditText
+                android:id="@+id/Teacher"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:ems="10"
+                android:inputType="text" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_top_corner_no_bottom_line"
+            android:padding="10dip" >
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_weight="2"
+                android:background="@null"
+                android:padding="5dip"
+                android:singleLine="true"
+                android:text="@string/courseTime"
+                android:textColor="#646464" />
+
+            <TextView
+                android:id="@+id/Time"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:padding="5dip"
+                android:textSize="17sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_bottom_corner_no_top_line"
+            android:padding="10dip" >
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_weight="2"
+                android:background="@null"
+                android:padding="5dip"
+                android:singleLine="true"
+                android:text="@string/courseTerm"
+                android:textColor="#646464" />
+
+            <TextView
+                android:id="@+id/Termtime"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:padding="5dip"
+                android:textSize="17sp" />
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

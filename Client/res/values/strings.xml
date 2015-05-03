@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">惠大校园助手</string>
+    <string name="app_name_en">HzuHelper</string>
+    <!--  -->
+    <string name="btn_save">保存</string>
+
+    <!--  -->
+    <string name="wodekebiao">我的课表</string>
+    <string name="btn_delete">删除本节课</string>
+    <string name="btn_courseTable">查看课程表</string>
+    <string name="courseName">课程名称</string>
+    <string name="courseSite">地		点</string>
+    <string name="courseTeacher">老		师</string>
+    <string name="courseTime">节		数</string>
+    <string name="courseTerm">周		数</string>
+    <string name="contentLen">255</string>
+    <string name="dianhua">电话</string>
+    <string name="comment">评论</string>
+    <!--  -->
+    <string name="wodechengji">我的成绩</string>
+
+    <!--  -->
+    <string name="huidashudong">惠大树洞</string>
+    <string name="wodeshudong">我的树洞</string>
+    <string name="shoudaoxiaoxi">收到消息</string>
+    <string name="fachuxiaoxi">发出消息</string>
+    <string name="huidawaimai">惠大外卖</string>
+    <string name="dianpupingjia">店铺评价</string>
+
+    <!--  -->
+    <string name="nickname">妇科刘叫兽</string>
+    <string name="personIntro">come on baby ！！！！</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+
+    
+    <string name="network_not_connected">网络连接失败，请检查网络设置</string>
+    <string name="xml_parser_failed">数据解析异常</string>
+    <string name="io_exception_error">文件流异常</string>
+    <string name="http_status_code_error">网络异常，错误码：%d</string>
+    <string name="http_exception_error">网络异常，请求超时</string>
+    <string name="socket_exception_error">网络异常，读取数据超时</string>
+    <string name="app_run_code_error">应用程序运行时异常</string>
+    
+</resources>

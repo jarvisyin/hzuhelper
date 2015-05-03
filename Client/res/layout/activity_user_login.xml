@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/loginRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/img_login_bg" >
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout02"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/login_back"
+        android:paddingBottom="10dp"
+        android:paddingTop="21dp" >
+
+        <EditText
+            android:id="@+id/Login_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/edit_login"
+            android:hint="请输入注册邮箱"
+            android:inputType="textEmailAddress"
+            android:maxLength="64"
+            android:paddingLeft="45sp"
+            android:saveEnabled="true" />
+
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/Login_email"
+            android:layout_alignLeft="@+id/Login_email"
+            android:layout_alignTop="@+id/Login_email"
+            android:layout_marginRight="15sp"
+            android:gravity="center_vertical"
+            android:paddingLeft="7sp"
+            android:text="账号"
+            android:textColor="#ff3f3f3f"
+            android:textSize="16dip" />
+
+        <EditText
+            android:id="@+id/Login_passWord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/Login_email"
+            android:layout_alignRight="@+id/Login_email"
+            android:layout_below="@+id/Login_email"
+            android:layout_marginRight="1dip"
+            android:background="@drawable/edit_login"
+            android:hint="请输入密码"
+            android:inputType="textPassword"
+            android:maxLength="15"
+            android:paddingLeft="45sp"
+            android:saveEnabled="true" />
+
+        <TextView
+            android:id="@+id/TextView02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/Login_passWord"
+            android:layout_alignRight="@+id/TextView01"
+            android:layout_alignTop="@+id/Login_passWord"
+            android:gravity="center_vertical"
+            android:paddingLeft="7.0sp"
+            android:text="密码"
+            android:textColor="#ff3f3f3f"
+            android:textSize="16.0dip" />
+
+        <Button
+            android:id="@+id/Login_comfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TextView02"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dip"
+            android:paddingLeft="25dip"
+            android:paddingRight="25dip"
+            android:text="登录" />
+
+        <TextView
+            android:id="@+id/login_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Login_comfirm"
+            android:layout_centerHorizontal="true"
+            android:padding="10dip"
+            android:text="还没账号？点击此处注册"
+            android:textColor="#000" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="MyAttr">
+        <attr name="leftButtonText" format="string" />
+        <attr name="centerTextViewText" format="string" />
+        <attr name="rightButtonText" format="string" />
+        <attr name="leftButtonBg" format="reference"/>
+        <attr name="rightButtonBg" format="reference" />
+    </declare-styleable>
+
+</resources>

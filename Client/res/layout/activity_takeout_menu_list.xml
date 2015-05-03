@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:myattrs="http://schemas.android.com/apk/res/com.hzuhelper"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white" >
+
+    <com.hzuhelper.wedget.TopBarLinearLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        myattrs:leftButtonBg="@drawable/img_btn_back" /> 
+
+    <RelativeLayout
+        android:id="@+id/res_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/img_footbar_border"
+        android:orientation="vertical"
+        android:paddingBottom="3dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="6dp" >
+
+        <LinearLayout
+            android:id="@+id/res_option"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/cai"
+                style="@style/takeout_restaurant_option_btn"
+                android:layout_marginRight="2dp"
+                android:drawableLeft="@drawable/img_btn_cai" />
+
+            <Button
+                android:id="@+id/ding"
+                style="@style/takeout_restaurant_option_btn"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:drawableLeft="@drawable/img_btn_ding" />
+
+            <Button
+                android:id="@+id/comment"
+                style="@style/takeout_restaurant_option_btn"
+                android:layout_marginLeft="2dp"
+                android:drawableLeft="@drawable/img_btn_comment1" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/res_option"
+            android:background="@drawable/shape_takeout_footbar_btn_bg"
+            android:drawableLeft="@drawable/img_takeout_phone"
+            android:drawablePadding="3dp"
+            android:gravity="center"
+            android:padding="8dp"
+            android:textColor="#777777"
+            android:textSize="@dimen/text_size_18" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/res_info"
+        android:layout_below="@id/topbar"
+        android:background="@color/white" >
+    </ListView>
+
+</RelativeLayout>

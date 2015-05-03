@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:myattrs="http://schemas.android.com/apk/res/com.hzuhelper"
+    android:id="@+id/rll_tweetList"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorF5F5F5" >
+
+    <com.hzuhelper.wedget.TopBarLinearLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        myattrs:centerTextViewText="@string/huidashudong"
+        myattrs:leftButtonBg="@drawable/img_btn_menu"
+        myattrs:rightButtonBg="@drawable/img_btn_chat_write" />
+
+    <RadioGroup
+        android:id="@+id/chat_footbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/chat_footbar_tweet_all"
+            style="@style/chat_tweet_footbar_radio"
+            android:checked="true"
+            android:drawableTop="@drawable/shape_chat_footbar_tweet_all"
+            android:text="@string/huidashudong" />
+
+        <RadioButton
+            android:id="@+id/chat_footbar_tweet_mine"
+            style="@style/chat_tweet_footbar_radio"
+            android:drawableTop="@drawable/shape_chat_footbar_tweet_mine"
+            android:text="@string/wodeshudong" />
+
+        <RadioButton
+            android:id="@+id/chat_footbar_message_receive"
+            style="@style/chat_tweet_footbar_radio"
+            android:drawableTop="@drawable/shape_chat_footbar_msg_receive"
+            android:text="@string/shoudaoxiaoxi" />
+
+        <RadioButton
+            android:id="@+id/chat_footbar_message_send"
+            style="@style/chat_tweet_footbar_radio"
+            android:drawableTop="@drawable/shape_chat_footbar_msg_send"
+            android:text="@string/fachuxiaoxi" />
+    </RadioGroup>
+
+    <com.hzuhelper.wedget.RefreshAbleListView
+        android:id="@+id/lv_tweet_all"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/chat_footbar"
+        android:layout_below="@id/topbar"
+        android:divider="@null" />
+
+    <com.hzuhelper.wedget.RefreshAbleListView
+        android:id="@+id/lv_tweet_mine"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/chat_footbar"
+        android:layout_below="@id/topbar"
+        android:divider="@null"
+        android:visibility="gone" />
+
+    <com.hzuhelper.wedget.RefreshAbleListView
+        android:id="@+id/lv_msg_send"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/chat_footbar"
+        android:layout_below="@id/topbar"
+        android:divider="@null"
+        android:visibility="gone" />
+    
+     <com.hzuhelper.wedget.RefreshAbleListView
+        android:id="@+id/lv_msg_receive"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/chat_footbar"
+        android:layout_below="@id/topbar"
+        android:divider="@null"
+        android:visibility="gone" />
+
+</RelativeLayout>
