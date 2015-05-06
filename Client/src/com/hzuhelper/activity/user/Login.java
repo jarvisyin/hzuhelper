@@ -19,7 +19,6 @@ import android.widget.Toast;
 import com.hzuhelper.AppStart;
 import com.hzuhelper.R;
 import com.hzuhelper.activity.BaseActivity;
-import com.hzuhelper.api.WebRequest;
 import com.hzuhelper.tools.ConstantStrUtil;
 import com.hzuhelper.tools.MD5Utils;
 import com.hzuhelper.tools.StringUtils;
