@@ -37,15 +37,13 @@
     <string name="hello_world">Hello world!</string>
 
     <!--  -->
-    
+
     <string name="shoujihaoma">手机号码</string>
     <string name="zhongguo">中国</string>
     <string name="mima">密码</string>
     <string name="denglu">登录</string>
     <string name="wangjimima">忘记密码</string>
     <string name="zhuce">注册</string>
-    
-    
     <string name="network_not_connected">网络连接失败，请检查网络设置</string>
     <string name="xml_parser_failed">数据解析异常</string>
     <string name="io_exception_error">文件流异常</string>
@@ -53,5 +51,7 @@
     <string name="http_exception_error">网络异常，请求超时</string>
     <string name="socket_exception_error">网络异常，读取数据超时</string>
     <string name="app_run_code_error">应用程序运行时异常</string>
-    
+    <string name="title_activity_reset_pwd">ResetPwd</string>
+    <string name="title_activity_phone_type_choice">PhoneTypeChoice</string>
+
 </resources>

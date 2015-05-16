@@ -14,6 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="none"
+            android:onClick="typeClick"
             android:text="中国 +86" />
 
         <EditText
@@ -40,6 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dip"
+        android:onClick="loginClick"
         android:text="@string/denglu"
         android:textSize="18sp" />
 
@@ -53,15 +55,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:textSize="16sp"
-            android:text="@string/zhuce" />
+            android:onClick="registerClick"
+            android:text="@string/zhuce"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/forgetpwd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="@string/wangjimima" />
+            android:onClick="forgetpwdClick"
+            android:text="@string/wangjimima"
+            android:textSize="16sp" />
     </RelativeLayout>
 
 </LinearLayout>

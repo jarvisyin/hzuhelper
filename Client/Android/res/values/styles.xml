@@ -2,7 +2,7 @@
 
     <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
         <item name="android:buttonStyle">@style/ButtonStyle</item>
-        <item name="android:windowBackground">#f0f0f0</item>
+        <item name="android:windowBackground">@color/colorF0F0F0</item>
     </style>
 
     <style name="ButtonStyle" parent="@android:style/Widget.Button">

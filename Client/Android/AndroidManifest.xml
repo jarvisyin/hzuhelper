@@ -9,8 +9,8 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-	<uses-permission android:name="android.permission.RESTART_PACKAGES" />
-	
+    <uses-permission android:name="android.permission.RESTART_PACKAGES" />
+
     <uses-sdk
         android:minSdkVersion="10"
         android:targetSdkVersion="15" />
@@ -21,6 +21,7 @@
         android:icon="@drawable/logo1"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
         <!-- com.hzuhelper.AppStart -->
         <activity
             android:name="com.hzuhelper.AppStart"
@@ -53,7 +54,7 @@
             android:name="com.hzuhelper.activity.course.Add"
             android:screenOrientation="portrait" >
         </activity>
-        <activity 
+        <activity
             android:name="com.hzuhelper.activity.course.ConflictList"
             android:screenOrientation="portrait" >
         </activity>
@@ -98,6 +99,15 @@
 
         <service android:name="com.hzuhelper.activity.AppUpdateService" >
         </service>
+
+        <activity
+            android:name="com.hzuhelper.activity.user.ResetPwd"
+            android:label="@string/title_activity_reset_pwd" >
+        </activity>
+        <activity
+            android:name="com.hzuhelper.activity.user.PhoneTypeChoice"
+            android:label="@string/title_activity_phone_type_choice" >
+        </activity>
     </application>
 
 </manifest>
