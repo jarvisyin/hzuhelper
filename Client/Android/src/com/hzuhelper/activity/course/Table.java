@@ -28,11 +28,11 @@ import android.widget.Toast;
 import com.hzuhelper.AppContext;
 import com.hzuhelper.R;
 import com.hzuhelper.activity.BaseActivity;
-import com.hzuhelper.api.WebRequest;
 import com.hzuhelper.database.CourseDB;
 import com.hzuhelper.model.CourseInfo;
 import com.hzuhelper.server.CourseService;
 import com.hzuhelper.tools.ConstantStrUtil;
+import com.hzuhelper.web.WebRequest;
 
 public class Table extends BaseActivity{
 

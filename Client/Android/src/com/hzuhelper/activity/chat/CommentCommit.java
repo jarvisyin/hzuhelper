@@ -17,8 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hzuhelper.activity.BaseActivity;
-import com.hzuhelper.api.WebRequest;
 import com.hzuhelper.tools.ConstantStrUtil;
+import com.hzuhelper.web.WebRequest;
 import com.hzuhelper.R;
 
 public class CommentCommit extends BaseActivity implements OnClickListener,

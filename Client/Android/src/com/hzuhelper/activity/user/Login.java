@@ -26,28 +26,24 @@ import com.hzuhelper.tools.StringUtils;
 public class Login extends BaseActivity implements OnClickListener,Runnable{
   private ProgressDialog dialog;
 
-  private EditText       loginEmail;
-  private EditText       loginPassword;
-  private String         email;
-  private String         password;
+  private EditText       email;
+  private EditText       password;
 
   @Override
   protected void onCreate(Bundle savedInstanceState){
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_user_login);
-    findViewById(R.id.login_text).setOnClickListener(this);
-    findViewById(R.id.Login_comfirm).setOnClickListener(this);
 
-    loginPassword = (EditText)findViewById(R.id.Login_passWord);
-    loginEmail = (EditText)findViewById(R.id.Login_email);
+    password = (EditText)findViewById(R.id.password);
+    email = (EditText)findViewById(R.id.phone);
   }
 
   @Override
   public void onClick(View v){
     switch (v.getId()) {
-    case R.id.Login_comfirm:
-      email = loginEmail.getText().toString();
-      password = loginPassword.getText().toString();
+    case R.id.login:
+      email = email.getText().toString();
+      password = password.getText().toString();
       if (!StringUtils.isEmail(email)||StringUtils.isEmpty(email)||StringUtils.isEmpty(password)) {
         Toast.makeText(getApplicationContext(),"账号或密码不能为空",Toast.LENGTH_LONG).show();
       } else {
@@ -70,7 +66,7 @@ public class Login extends BaseActivity implements OnClickListener,Runnable{
 
   private void verifyLogin(String email,String password){
     String IsLogin = null;
-    password=  MD5Utils.getMD5Str(password);
+    password = MD5Utils.getMD5Str(password);
     String url = ConstantStrUtil.DOMAINNAME+"/users/login";
     try {
       HashMap<String,String> params = new HashMap<String,String>();

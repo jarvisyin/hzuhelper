@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import com.hzuhelper.model.TakeoutRestaurantInfo;
 
 public class StaticData {
+  
 	private static TakeoutRestaurantInfo Takeout_restaurantInfo;
 	public final static int RESTAURANT_COMMENT = 1;
 

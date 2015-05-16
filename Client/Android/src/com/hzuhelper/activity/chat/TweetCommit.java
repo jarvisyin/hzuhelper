@@ -17,10 +17,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hzuhelper.activity.BaseActivity;
-import com.hzuhelper.api.WebRequest;
 import com.hzuhelper.config.StaticData;
 import com.hzuhelper.model.TakeoutRestaurantInfo;
 import com.hzuhelper.tools.ConstantStrUtil;
+import com.hzuhelper.web.WebRequest;
 import com.hzuhelper.R;
 
 public class TweetCommit extends BaseActivity implements OnClickListener,

@@ -33,7 +33,6 @@ import com.hzuhelper.activity.AppUpdateService;
 import com.hzuhelper.activity.BaseActivity;
 import com.hzuhelper.activity.chat.TweetList;
 import com.hzuhelper.activity.user.Login;
-import com.hzuhelper.api.WebRequest;
 import com.hzuhelper.database.CourseDB;
 import com.hzuhelper.database.DAOHelper;
 import com.hzuhelper.database.ScoreDB;

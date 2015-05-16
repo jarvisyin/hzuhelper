@@ -29,11 +29,11 @@ import android.widget.Toast;
 import com.hzuhelper.R;
 import com.hzuhelper.activity.BaseActivity;
 import com.hzuhelper.adapter.CommentAdapter;
-import com.hzuhelper.api.WebRequest;
 import com.hzuhelper.model.ChatComment1Info;
 import com.hzuhelper.model.ChatTweetInfo;
 import com.hzuhelper.tools.ConstantStrUtil;
 import com.hzuhelper.tools.StringUtils;
+import com.hzuhelper.web.WebRequest;
 
 public class TweetShow extends BaseActivity implements OnScrollListener,OnClickListener {
 	private ChatTweetInfo chat_tweetInfo;

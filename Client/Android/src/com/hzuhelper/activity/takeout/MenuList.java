@@ -28,11 +28,11 @@ import com.hzuhelper.R;
 import com.hzuhelper.activity.BaseActivity;
 import com.hzuhelper.activity.chat.TweetCommit;
 import com.hzuhelper.adapter.MenuAdapter;
-import com.hzuhelper.api.WebRequest;
 import com.hzuhelper.config.StaticData;
 import com.hzuhelper.model.TakeoutMenuItemInfo;
 import com.hzuhelper.model.TakeoutRestaurantInfo;
 import com.hzuhelper.tools.ConstantStrUtil;
+import com.hzuhelper.web.WebRequest;
 
 public class MenuList extends BaseActivity {
 

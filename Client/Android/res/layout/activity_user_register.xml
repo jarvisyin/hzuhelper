@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/img_register_bg"
+    android:layout_height="match_parent" 
     android:orientation="vertical" >
 
     <TableLayout
@@ -13,14 +12,12 @@
         android:layout_centerInParent="true"
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
-        android:layout_marginTop="50dip"
-        android:background="@drawable/login_back"
+        android:layout_marginTop="50dip" 
         android:orientation="vertical" >
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edit_login"
+            android:layout_height="wrap_content" 
             android:padding="5dip" >
 
             <TextView
@@ -41,8 +38,7 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edit_login"
+            android:layout_height="wrap_content" 
             android:padding="5dip" >
 
             <TextView
@@ -64,8 +60,7 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edit_login"
+            android:layout_height="wrap_content" 
             android:padding="5dip" >
 
             <TextView
@@ -87,8 +82,7 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edit_login"
+            android:layout_height="wrap_content" 
             android:padding="5dip" >
 
             <TextView
@@ -110,8 +104,7 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edit_login"
+            android:layout_height="wrap_content" 
             android:padding="5dip" >
 
             <TextView

@@ -1,5 +1,16 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="android:buttonStyle">@style/ButtonStyle</item>
+        <item name="android:windowBackground">#f0f0f0</item>
+    </style>
+
+    <style name="ButtonStyle" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/btn_bg0</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
     <style name="btn_comment">
         <item name="android:layout_width">@dimen/len_70dp</item>
         <item name="android:layout_height">@dimen/len_30dp</item>
@@ -59,8 +70,5 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
     </style>
-
-    <!-- Application theme. 
-    <style name="AppTheme" parent="Theme.Sherlock.Light.NoActionBar"></style>-->
 
 </resources>

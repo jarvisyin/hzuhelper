@@ -24,10 +24,10 @@ import android.widget.Toast;
 
 import com.hzuhelper.R;
 import com.hzuhelper.activity.BaseActivity;
-import com.hzuhelper.api.WebRequest;
 import com.hzuhelper.config.StaticData;
 import com.hzuhelper.model.TakeoutRestaurantInfo;
 import com.hzuhelper.tools.ConstantStrUtil;
+import com.hzuhelper.web.WebRequest;
 
 public class ResList extends BaseActivity{
   private ArrayList<TakeoutRestaurantInfo> list;
