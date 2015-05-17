@@ -12,7 +12,7 @@ public class PhoneTypeChoice extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_phone_type_choice);
+        setContentView(R.layout.activity_user_phone_type_choice);
     }
 
     @Override

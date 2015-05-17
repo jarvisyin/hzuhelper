@@ -41,6 +41,11 @@
     <string name="shoujihaoma">手机号码</string>
     <string name="zhongguo">中国</string>
     <string name="mima">密码</string>
+    <string name="xinmima">新密码</string>
+    <string name="zaicishurumima">再次输入密码</string>
+    <string name="duanxinyanzhema">短信验证码</string>
+    <string name="huoquyanzhema">获取验证码</string>
+    <string name="tijiao">提交</string>
     <string name="denglu">登录</string>
     <string name="wangjimima">忘记密码</string>
     <string name="zhuce">注册</string>

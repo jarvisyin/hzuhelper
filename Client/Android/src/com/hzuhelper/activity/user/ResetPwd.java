@@ -12,7 +12,7 @@ public class ResetPwd extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reset_pwd);
+        setContentView(R.layout.activity_user_reset_pwd);
     }
 
     @Override

@@ -6,9 +6,9 @@
     </style>
 
     <style name="ButtonStyle" parent="@android:style/Widget.Button">
-        <item name="android:background">@drawable/btn_bg0</item>
+        <item name="android:background">@drawable/btn_bg_green</item>
         <item name="android:padding">10dp</item>
-        <item name="android:textColor">#ffffff</item>
+        <item name="android:textColor">@android:color/white</item>
     </style>
 
     <style name="btn_comment">

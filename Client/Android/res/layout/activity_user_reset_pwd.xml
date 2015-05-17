@@ -1,16 +1,89 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ResetPwd" >
+    android:orientation="vertical"
+    android:padding="20dp" >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:onClick="typeClick"
+            android:text="中国 +86" />
+
+        <EditText
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/type"
+            android:hint="@string/shoujihaoma"
+            android:inputType="phone"
+            android:maxLength="32" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_marginTop="10dip" >
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/getcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/code"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/code"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="3dp"
+            android:background="@drawable/btn_bg_orange"
+            android:gravity="center"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="@string/huoquyanzhema"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@id/code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/getcode"
+            android:hint="@string/duanxinyanzhema"
+            android:onClick="typeClick" />
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/password1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:hint="@string/xinmima"
+        android:inputType="textPassword"
+        android:maxLength="16" />
+
+    <EditText
+        android:id="@+id/password2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:hint="@string/zaicishurumima"
+        android:inputType="textPassword"
+        android:maxLength="16" />
+
+    <Button
+        android:id="@+id/commit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:onClick="commit"
+        android:text="@string/tijiao"
+        android:textSize="18sp" />
+
+</LinearLayout>
