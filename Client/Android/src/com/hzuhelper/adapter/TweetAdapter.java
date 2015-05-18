@@ -74,7 +74,7 @@ public class TweetAdapter extends BaseAdapter {
 		listItemView.lly_info.setTag(model);
 		listItemView.lly_info.setOnClickListener(liOnclickListerer);
 		listItemView.tv_date.setText(DateUtil.friendly_time(model
-				.getPublish_date()));
+				.getPublishDate()));
 		listItemView.tv_content.setText(Html.fromHtml(StringUtils
 				.tweetContentTran(model.getContent())));
 		listItemView.tv_author.setText("同学甲乙丙丁");

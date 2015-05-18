@@ -12,7 +12,7 @@ public class staticURL {
     public static final String URL_PATH_CHAT_TWEET_GETLIST  = "/chat/tweet/getlist";
     public static final String URL_PATH_CHAT_TWEET_COMMIT   = "/chat/tweet/commit";
     public static final String URL_PATH_CHAT_COMMENT_COMMIT = "/chat/comment/commit";
-
+    public static final String chat_comment_getlist1        = "/chat/comment/getlist1";
     public static final String users_login                  = "/users/login";
 
 }

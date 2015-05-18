@@ -179,7 +179,7 @@ public class TweetList extends BaseActivity{
       for (int i = 0, length = jsonResponse.length(); i<length; i++) {
         JSONObject jo = jsonResponse.getJSONObject(i);
         ChatTweetInfo m = new ChatTweetInfo();
-        m.setAuthor_id(jo.getString("authorId"));
+        m.setAuthorId(jo.getString("authorId"));
         m.setCai(jo.getInt("cai"));
         m.setComment_count(jo.getInt("commentCount"));
         m.setContent(jo.getString("content"));
@@ -282,7 +282,7 @@ public class TweetList extends BaseActivity{
       for (int i = 0, length = jsonResponse.length(); i<length; i++) {
         JSONObject jo = jsonResponse.getJSONObject(i);
         ChatTweetInfo m = new ChatTweetInfo();
-        m.setAuthor_id(jo.getString("authorId"));
+        m.setAuthorId(jo.getString("authorId"));
         m.setCai(jo.getInt("cai"));
         m.setComment_count(jo.getInt("commentCount"));
         m.setContent(jo.getString("content"));
