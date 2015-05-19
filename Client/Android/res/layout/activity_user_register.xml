@@ -1,138 +1,89 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    android:orientation="vertical" >
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp" >
 
-    <TableLayout
-        android:id="@+id/registerLL"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:onClick="typeClick"
+            android:text="中国 +86" />
+
+        <EditText
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/type"
+            android:hint="@string/shoujihaoma"
+            android:inputType="phone"
+            android:maxLength="32" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="10dip"
-        android:layout_marginRight="10dip"
-        android:layout_marginTop="50dip" 
-        android:orientation="vertical" >
+        android:layout_marginTop="10dip" >
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" 
-            android:padding="5dip" >
+        <TextView
+            android:id="@+id/getcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/code"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/code"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="3dp"
+            android:background="@drawable/btn_bg_orange"
+            android:gravity="center"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="@string/huoquyanzhema"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="10dip"
-                android:text="邮        箱" />
+        <EditText
+            android:id="@id/code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/getcode"
+            android:hint="@string/duanxinyanzhema"
+            android:onClick="typeClick" />
+    </RelativeLayout>
 
-            <EditText
-                android:id="@+id/LoginEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:hint="请输入你的邮箱"
-                android:inputType="textEmailAddress" />
-        </TableRow>
+    <EditText
+        android:id="@+id/password1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:hint="@string/mima"
+        android:inputType="textPassword"
+        android:maxLength="16" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" 
-            android:padding="5dip" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="10dip"
-                android:text="密        码" />
-
-            <EditText
-                android:id="@+id/LoginPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:hint="请输入密码"
-                android:inputType="textPassword"
-                android:maxLength="15" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" 
-            android:padding="5dip" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="10dip"
-                android:text="确认密码" />
-
-            <EditText
-                android:id="@+id/LoginRepassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:hint="请再次输入密码"
-                android:inputType="textPassword"
-                android:maxLength="20" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" 
-            android:padding="5dip" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="10dip"
-                android:text="学        号" />
-
-            <EditText
-                android:id="@+id/LoginStudentID"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:hint="请输入你的学号"
-                android:inputType="number"
-                android:maxLength="16" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" 
-            android:padding="5dip" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="10dip"
-                android:text="真实姓名" />
-
-            <EditText
-                android:id="@+id/LoginName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:hint="请输入你的真实姓名 "
-                android:inputType="text"
-                android:maxLength="19" />
-        </TableRow>
-    </TableLayout>
+    <EditText
+        android:id="@+id/password2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:hint="@string/zaicishurumima"
+        android:inputType="textPassword"
+        android:maxLength="16" />
 
     <Button
-        android:id="@+id/LoginComfirm"
-        android:layout_width="wrap_content"
+        android:id="@+id/commit"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/registerLL"
-        android:layout_centerHorizontal="true"
-        android:paddingLeft="25dip"
-        android:paddingRight="25dip"
-        android:text="注册" />
+        android:layout_marginTop="10dip"
+        android:onClick="commit"
+        android:text="@string/zhuce"
+        android:textSize="18sp" />
 
-</RelativeLayout>
+</LinearLayout>

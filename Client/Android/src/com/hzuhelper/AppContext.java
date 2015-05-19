@@ -10,6 +10,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.view.Display;
 import android.view.WindowManager;
+import cn.smssdk.SMSSDK;
 
 import com.hzuhelper.tools.StringUtils;
 
@@ -39,7 +40,8 @@ public class AppContext extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-        //注册App异常崩溃处理器
+		SMSSDK.initSDK(this, "<您的appkey>", "<您的appsecret>");
+        //注册App异常崩溃处理器 
         Thread.setDefaultUncaughtExceptionHandler(AppException.getAppExceptionHandler());        
         initScreenDisplay();
         appContext=this;
