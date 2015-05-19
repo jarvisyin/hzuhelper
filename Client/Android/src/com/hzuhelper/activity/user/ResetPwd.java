@@ -1,11 +1,10 @@
 package com.hzuhelper.activity.user;
 
-import com.hzuhelper.R;
-import com.hzuhelper.R.layout;
-
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
+
+import com.hzuhelper.R;
 
 public class ResetPwd extends Activity {
 
