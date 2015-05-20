@@ -181,7 +181,7 @@ public class TweetList extends BaseActivity{
         ChatTweetInfo m = new ChatTweetInfo();
         m.setAuthorId(jo.getString("authorId"));
         m.setCai(jo.getInt("cai"));
-        m.setComment_count(jo.getInt("commentCount"));
+        m.setCommentCount(jo.getInt("commentCount"));
         m.setContent(jo.getString("content"));
         m.setDing(jo.getInt("ding"));
         m.setId(jo.getInt("id"));
@@ -284,13 +284,13 @@ public class TweetList extends BaseActivity{
         ChatTweetInfo m = new ChatTweetInfo();
         m.setAuthorId(jo.getString("authorId"));
         m.setCai(jo.getInt("cai"));
-        m.setComment_count(jo.getInt("commentCount"));
+        m.setCommentCount(jo.getInt("commentCount"));
         m.setContent(jo.getString("content"));
         m.setDing(jo.getInt("ding"));
         m.setId(jo.getInt("id"));
         m.setPublish_date(jo.getString("publishDatetime"));
         m.setStatu(jo.getInt("statu"));
-        m.setTag_id(jo.getInt("tagId"));
+        m.setTagId(jo.getInt("tagId"));
         list.add(m);
       }
       return list;

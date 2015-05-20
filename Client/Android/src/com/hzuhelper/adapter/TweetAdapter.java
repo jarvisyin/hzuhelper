@@ -80,9 +80,9 @@ public class TweetAdapter extends BaseAdapter {
 		listItemView.tv_author.setText("同学甲乙丙丁");
 		listItemView.btn_comment.setTag(model.getId());
 		listItemView.btn_comment.setOnClickListener(bcOnclickListerer);
-		if (model.getComment_count() > 0)
+		if (model.getCommentCount() > 0)
 			listItemView.btn_comment.setText(String.valueOf(model
-					.getComment_count()));
+					.getCommentCount()));
 		else
 			listItemView.btn_comment.setText("评论");
 		return view;

@@ -101,7 +101,7 @@ public class TweetShow extends BaseActivity implements OnScrollListener,OnClickL
 
         tv_date.setText(chatTweetInfo.getPublishDate());
         tv_content.setText(Html.fromHtml(StringUtils.tweetContentTran(chatTweetInfo.getContent())));
-        if (chatTweetInfo.getComment_count()>0) {
+        if (chatTweetInfo.getCommentCount()>0) {
             btn_comment.setText(String.valueOf(chatTweetInfo.getComment_count()));
         } else {
             btn_comment.setText("评论");
@@ -154,7 +154,7 @@ public class TweetShow extends BaseActivity implements OnScrollListener,OnClickL
 
     private void jsonToTweetInfo(JSONObject jsonRsp1) throws JSONException{
         chatTweetInfo.setId(jsonRsp1.getInt("id"));
-        chatTweetInfo.setComment_count(jsonRsp1.getInt("commentCount"));
+        chatTweetInfo.setCommentCount(jsonRsp1.getInt("commentCount"));
         chatTweetInfo.setContent(jsonRsp1.getString("content"));
         chatTweetInfo.setPublish_date(jsonRsp1.getString("publishDatetime"));
     }
