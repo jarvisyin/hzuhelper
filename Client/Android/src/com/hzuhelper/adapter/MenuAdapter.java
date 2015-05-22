@@ -10,13 +10,13 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.hzuhelper.R;
-import com.hzuhelper.model.TakeoutMenuItemInfo;
+import com.hzuhelper.model.receive.ARRAY_P6002;
 
 public class MenuAdapter extends BaseAdapter {
 
-	private	List<TakeoutMenuItemInfo> list;
+	private	List<ARRAY_P6002> list;
 	private	Context context;
-	public MenuAdapter(Context context,List<TakeoutMenuItemInfo> list){
+	public MenuAdapter(Context context,List<ARRAY_P6002> list){
 		this.list=list;
 		this.context=context;
 	}
@@ -55,7 +55,7 @@ public class MenuAdapter extends BaseAdapter {
 			listItemView = (ListItemView) cView.getTag();
 		}
 
-		TakeoutMenuItemInfo model = list.get(position);
+		ARRAY_P6002 model = list.get(position);
 		listItemView.name.setText(model.getName());
 		listItemView.price.setText(String.valueOf(model.getPrice()));
 		listItemView.intro.setText(model.getIntro());

@@ -2,11 +2,11 @@ package com.hzuhelper.config;
 
 import java.util.LinkedHashMap;
 
-import com.hzuhelper.model.TakeoutRestaurantInfo;
+import com.hzuhelper.model.receive.ARRAY_P6003;
 
 public class StaticData {
   
-	private static TakeoutRestaurantInfo Takeout_restaurantInfo;
+	private static ARRAY_P6003 Takeout_restaurantInfo;
 	public final static int RESTAURANT_COMMENT = 1;
 
 	public static LinkedHashMap<Integer, String> weekTime;
@@ -70,14 +70,14 @@ public class StaticData {
 		termTime.put(25, "第25周");
 	}
 
-	public static TakeoutRestaurantInfo getTakeout_restaurantInfo() {
-		TakeoutRestaurantInfo a = Takeout_restaurantInfo;
+	public static ARRAY_P6003 getTakeout_restaurantInfo() {
+		ARRAY_P6003 a = Takeout_restaurantInfo;
 		Takeout_restaurantInfo = null;
 		return a;
 	}
 
 	public static void setTakeout_restaurantInfo(
-			TakeoutRestaurantInfo takeout_restaurantInfo) {
+			ARRAY_P6003 takeout_restaurantInfo) {
 		Takeout_restaurantInfo = takeout_restaurantInfo;
 	}
 }

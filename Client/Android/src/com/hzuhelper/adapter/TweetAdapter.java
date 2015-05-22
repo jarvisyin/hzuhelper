@@ -17,12 +17,12 @@ import android.widget.TextView;
 import com.hzuhelper.R;
 import com.hzuhelper.activity.chat.CommentCommit;
 import com.hzuhelper.activity.chat.TweetShow;
-import com.hzuhelper.model.ChatTweetInfo;
+import com.hzuhelper.model.receive.ARRAY_CT0001;
 import com.hzuhelper.tools.DateUtil;
 import com.hzuhelper.tools.StringUtils;
 
 public class TweetAdapter extends BaseAdapter {
-	private ArrayList<ChatTweetInfo> list = null;
+	private ArrayList<ARRAY_CT0001> list = null;
 	private Context context;
 
 	class ListItemView {
@@ -33,7 +33,7 @@ public class TweetAdapter extends BaseAdapter {
 		Button btn_comment;
 	}
 
-	public TweetAdapter(ArrayList<ChatTweetInfo> list, Context context) {
+	public TweetAdapter(ArrayList<ARRAY_CT0001> list, Context context) {
 		this.context = context;
 		this.list = list;
 	}
@@ -69,7 +69,7 @@ public class TweetAdapter extends BaseAdapter {
 		} else {
 			listItemView = (ListItemView) view.getTag();
 		}
-		ChatTweetInfo model = list.get(index);
+		ARRAY_CT0001 model = list.get(index);
 
 		listItemView.lly_info.setTag(model);
 		listItemView.lly_info.setOnClickListener(liOnclickListerer);
@@ -98,7 +98,7 @@ public class TweetAdapter extends BaseAdapter {
 
 	OnClickListener liOnclickListerer = new OnClickListener() {
 		public void onClick(View v) {
-			ChatTweetInfo model = (ChatTweetInfo) v.getTag();
+			ARRAY_CT0001 model = (ARRAY_CT0001) v.getTag();
 			Intent intent = new Intent(context, TweetShow.class);
 			intent.putExtra("tweetId", model.getId());
 			context.startActivity(intent);

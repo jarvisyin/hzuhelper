@@ -19,7 +19,7 @@ import com.hzuhelper.activity.BaseActivity;
 import com.hzuhelper.config.StaticData;
 import com.hzuhelper.config.StaticValues;
 import com.hzuhelper.config.staticURL;
-import com.hzuhelper.model.TakeoutRestaurantInfo;
+import com.hzuhelper.model.receive.ARRAY_P6003;
 import com.hzuhelper.tools.ConstantStrUtil;
 import com.hzuhelper.tools.ToastUtil;
 import com.hzuhelper.web.ResultObj;
@@ -36,7 +36,7 @@ public class TweetCommit extends BaseActivity implements OnClickListener,TextWat
     private long                  count;
     private long                  inputCount;
     private int                   command;
-    private TakeoutRestaurantInfo takeoutRestaurantInfo;
+    private ARRAY_P6003 takeoutRestaurantInfo;
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);

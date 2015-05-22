@@ -19,193 +19,122 @@ import com.hzuhelper.R;
 import com.hzuhelper.activity.BaseActivity;
 import com.hzuhelper.activity.chat.TweetCommit;
 import com.hzuhelper.adapter.TweetAdapter;
-import com.hzuhelper.model.ChatTweetInfo;
+import com.hzuhelper.config.StaticValues;
+import com.hzuhelper.model.receive.ARRAY_CT0001;
+import com.hzuhelper.model.receive.CT0001;
 import com.hzuhelper.tools.ConstantStrUtil;
+import com.hzuhelper.tools.ToastUtil;
+import com.hzuhelper.web.JSONUtils;
+import com.hzuhelper.web.ResultObj;
 import com.hzuhelper.web.WebRequest;
 import com.hzuhelper.wedget.RefreshAbleListView;
 import com.hzuhelper.wedget.RefreshAbleListView.OnGetMoreDateListener;
 import com.hzuhelper.wedget.RefreshAbleListView.OnRefreshListener;
 
-public class ResCommentList extends BaseActivity implements OnClickListener{
+public class ResCommentList extends BaseActivity implements OnClickListener {
 
-	private int tagId;
+    private RefreshAbleListView     listview;
+    private ArrayList<ARRAY_CT0001> list1;
+    private TweetAdapter            adapter;
+    private int                     tagId;
 
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_takeout_res_comment_list);
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_takeout_res_comment_list);
 
-		getTagId();
-		initListView();
-		listview.refresh();
-		findViewById(R.id.btn_right).setOnClickListener(this);
-	}
+        tagId = getIntent().getIntExtra("tagId",-1);
+        initListView();
+        listview.refresh();
+        findViewById(R.id.btn_right).setOnClickListener(this);
+    }
 
-	private void getTagId() {
-		tagId = getIntent().getIntExtra("tagId", -1);
-		if (tagId == -1) {
-			throw new RuntimeException("tagId is null");
-		}
-	}
+    /**
+     * 初始化
+     */
+    private void initListView(){
+        list1 = new ArrayList<ARRAY_CT0001>();
+        adapter = new TweetAdapter(list1,ResCommentList.this);
+        listview = (RefreshAbleListView)findViewById(R.id.listView);
+        listview.setAdapter(adapter);
+        listview.setonRefreshListener(new OnRefreshListener() {
+            public void onRefresh(){
+                refresh();
+            }
+        });
+        listview.setonGetMoreDateListene(new OnGetMoreDateListener() {
+            public void onGetMoreDate(){
+                getMoreDate();
+            }
+        });
+    }
 
-	// 加载全部tweet
-	private final int TWEET_ALL_REFRESH_FAIL = 10;
-	private final int TWEET_ALL_GET_MORE_FAIL = 13;
-	private final int TWEET_ALL_REFRESH = 11;
-	private final int TWEET_ALL_GET_MORE_DATA = 12;
-	private RefreshAbleListView listview;
-	private ArrayList<ChatTweetInfo> list1;
-	private ArrayList<ChatTweetInfo> list2;
-	private TweetAdapter adapter;
+    /**
+     * 刷新
+     */
+    private void refresh(){
+        WebRequest wq = new WebRequest(ConstantStrUtil.URL_PATH_CHAT_TWEET_GETLIST) {
+            @Override
+            protected void onFailure(ResultObj resultObj){
+                ToastUtil.show(resultObj);
+                listview.onRefreshComplete();
+            }
 
-	/**
-	 * 初始化
-	 */
-	private void initListView() {
-		list1 = new ArrayList<ChatTweetInfo>();
-		list2 = null;
-		adapter = new TweetAdapter(list1, ResCommentList.this);
-		listview = (RefreshAbleListView) findViewById(R.id.listView);
-		listview.setAdapter(adapter);
-		listview.setonRefreshListener(new OnRefreshListener() {
-			public void onRefresh() {
-				refresh();
-			}
-		});
-		listview.setonGetMoreDateListene(new OnGetMoreDateListener() {
-			public void onGetMoreDate() {
-				getMoreDate();
-			}
-		});
-	}
+            @Override
+            protected void onSuccess(ResultObj resultObj){
+                CT0001 ct0001 = JSONUtils.fromJson(resultObj,CT0001.class);
+                list1.clear();
+                list1.addAll(ct0001.getARRAY_CT0001());
+                if (ct0001.getARRAY_CT0001().size()<20) {
+                    listview.setIsGetMoreDataable(false);
+                } else {
+                    listview.setIsGetMoreDataable(true);
+                }
+                adapter.notifyDataSetChanged();
+                listview.onRefreshComplete();
+            }
+        };
+        wq.setParam(StaticValues.type,StaticValues.tag);
+        wq.setParam(StaticValues.tagId,String.valueOf(tagId));
+        wq.start();
+    }
 
-	/**
-	 * 刷新
-	 */
-	private void refresh() {
-		new Thread(new Runnable() {
-			public void run() {
-				list2 = loadTweetAllData(ConstantStrUtil.DOMAINNAME
-						+ ConstantStrUtil.URL_PATH_CHAT_TWEET_GETLIST);
-				if (list2 == null) {
-					handler.sendEmptyMessage(TWEET_ALL_REFRESH_FAIL);
-					return;
-				}
-				handler.sendEmptyMessage(TWEET_ALL_REFRESH);
-			}
-		}).start();
-	}
+    /**
+     * 获取更多数据
+     */
+    private void getMoreDate(){
+        int listSize = 0;
+        if ((listSize = list1.size())<1) return;
+        ARRAY_CT0001 model = list1.get(listSize-1);
+        WebRequest wq = new WebRequest(ConstantStrUtil.URL_PATH_CHAT_TWEET_GETLIST) {
+            @Override
+            protected void onFailure(ResultObj resultObj){
+                ToastUtil.show(resultObj);
+                listview.onRefreshComplete();
+            }
 
-	/**
-	 * 获取更多数据
-	 */
-	private void getMoreDate() {
-		new Thread(new Runnable() {
-			public void run() {
-				int listSize = 0;
-				if ((listSize = list1.size()) < 1)
-					return;
-				ChatTweetInfo model = list1.get(listSize - 1);
-				list2 = loadTweetAllData(ConstantStrUtil.DOMAINNAME
-						+ ConstantStrUtil.URL_PATH_CHAT_TWEET_GETLIST + "?id="
-						+ model.getId());
-				if (list2 == null) {
-					handler.sendEmptyMessage(TWEET_ALL_GET_MORE_FAIL);
-					return;
-				}
-				handler.sendEmptyMessage(TWEET_ALL_GET_MORE_DATA);
-			}
-		}).start();
-	}
+            @Override
+            protected void onSuccess(ResultObj resultObj){
+                CT0001 ct0001 = JSONUtils.fromJson(resultObj,CT0001.class);
+                list1.addAll(ct0001.getARRAY_CT0001());
+                if (ct0001.getARRAY_CT0001().size()<20) {
+                    listview.setIsGetMoreDataable(false);
+                } else {
+                    listview.setIsGetMoreDataable(true);
+                }
+                adapter.notifyDataSetChanged();
+                listview.onGetMoreDateComplete();
+            }
+        };
+        wq.setParam(StaticValues.type,StaticValues.tag);
+        wq.setParam(StaticValues.tagId,String.valueOf(tagId));
+        wq.setParam(StaticValues.id,String.valueOf(model.getId()));
+        wq.start();
+    }
 
-	/**
-	 * 网络获取数据
-	 */
-	private ArrayList<ChatTweetInfo> loadTweetAllData(String url) {
-		ArrayList<ChatTweetInfo> list = new ArrayList<ChatTweetInfo>(20);
-		WebRequest wq = new WebRequest(url);
-		HashMap<String, String> params = new HashMap<String, String>();
-		params.put(ConstantStrUtil.STR_TYPE, "tag");
-		params.put("tagId", String.valueOf(tagId));
-		wq.setParams(params);
-		String json = wq.post();
-		if (json == null) {
-			return null;
-		}
-		JSONObject jsonResult;
-		try {
-			jsonResult = new JSONObject(json);
-			if (!jsonResult.getString(ConstantStrUtil.STR_STATU).equals(
-					ConstantStrUtil.STR_TRUE)) {
-				return null;
-			}
-			JSONArray jsonResponse = jsonResult
-					.getJSONArray(ConstantStrUtil.STR_RESPONSE);
-			for (int i = 0, length = jsonResponse.length(); i < length; i++) {
-				JSONObject jo = jsonResponse.getJSONObject(i);
-				ChatTweetInfo m = new ChatTweetInfo();
-				m.setAuthorId(jo.getString("authorId"));
-				m.setCai(jo.getInt("cai"));
-				m.setComment_count(jo.getInt("commentCount"));
-				m.setContent(jo.getString("content"));
-				m.setDing(jo.getInt("ding"));
-				m.setId(jo.getInt("id"));
-				m.setPublish_date(jo.getString("publishDatetime"));
-				m.setStatu(jo.getInt("statu"));
-				m.setTag_id(jo.getInt("tagId"));
-				list.add(m);
-			}
-			return list;
-		} catch (JSONException ex) {
-			ex.printStackTrace();
-			return null;
-		}
-	}
-
-	private Handler handler = new Handler() {
-		public void handleMessage(Message msg) {
-			switch (msg.what) {
-			case TWEET_ALL_REFRESH_FAIL:
-				Toast.makeText(ResCommentList.this, "获取数据失败",
-						Toast.LENGTH_SHORT).show();
-				listview.onRefreshComplete();
-				break;
-			case TWEET_ALL_GET_MORE_FAIL:
-				Toast.makeText(ResCommentList.this, "获取数据失败",
-						Toast.LENGTH_SHORT).show();
-				listview.onGetMoreDateComplete();
-				break;
-			case TWEET_ALL_REFRESH:
-				list1.clear();
-				list1.addAll(list2);
-				if (list2.size() < 20) {
-					listview.setIsGetMoreDataable(false);
-				} else {
-					listview.setIsGetMoreDataable(true);
-				}
-				list2 = null;
-				adapter.notifyDataSetChanged();
-				listview.onRefreshComplete();
-				break;
-			case TWEET_ALL_GET_MORE_DATA:
-				list1.addAll(list2);
-				if (list2.size() < 20) {
-					listview.setIsGetMoreDataable(false);
-				} else {
-					listview.setIsGetMoreDataable(true);
-				}
-				list2 = null;
-				adapter.notifyDataSetChanged();
-				listview.onGetMoreDateComplete();
-				break;
-			}
-		}
-	};
-
-	@Override
-	public void onClick(View v) {
-		Intent intent = new Intent(ResCommentList.this,
-				TweetCommit.class);
-		startActivity(intent);
-	}
+    @Override
+    public void onClick(View v){
+        Intent intent = new Intent(ResCommentList.this,TweetCommit.class);
+        startActivity(intent);
+    }
 
 }
