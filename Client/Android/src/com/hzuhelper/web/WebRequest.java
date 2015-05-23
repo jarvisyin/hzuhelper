@@ -25,59 +25,7 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.hzuhelper.config.StaticValues;
-
-<<<<<<< HEAD
-public class WebRequest implements Runnable{
-
-  public static final short              METHOD_POST       = 1;
-  public static final short              METHOD_GET        = 0;
-  public static final String             SYSTEM_ENCODING   = "UTF-8";
-
-  private CookieStore                    cookieStore;
-
-  private String                         baseUrl;
-  private LinkedList<BasicNameValuePair> params;
-  private HashMap<String,String>         headers;
-  private int                            connectionTimeout = 10000;
-  private int                            soTimeout         = 20000;
-  private short                          method;
-
-  private DefaultHttpClient              httpClient;
-  private HttpResponse                   response;
-
-  private ResultObj                      resultObj;
-
-  public WebRequest(String baseUrl,short method){
-    this(baseUrl);
-    this.method = method;
-  }
-
-  public WebRequest(String baseUrl){
-    this.baseUrl = baseUrl;
-    HttpParams httpParams = new BasicHttpParams();
-    HttpConnectionParams.setConnectionTimeout(httpParams,connectionTimeout);
-    HttpConnectionParams.setSoTimeout(httpParams,soTimeout);
-    this.httpClient = new DefaultHttpClient(httpParams);
-    this.cookieStore = CookiesUtils.getInstances().getCookieStore();
-  }
-
-  public void start(){
-    new Thread(this).start();
-  }
-
-  @Override
-  public void run(){
-    switch (method) {
-    case METHOD_POST:
-      post();
-      break;
-    case METHOD_GET:
-      get();
-      break;
-    default:
-      get();
-      break;
-=======
+ 
 public class WebRequest implements Runnable {
 
     public static final short              METHOD_POST       = 1;
@@ -100,8 +48,7 @@ public class WebRequest implements Runnable {
 
     public WebRequest(String baseUrl,short method){
         this(baseUrl);
-        this.method = method;
->>>>>>> b3a3867b86ded446fea022ae63b1ce587c34157d
+        this.method = method; 
     }
 
     public WebRequest(String baseUrl){
@@ -235,18 +182,7 @@ public class WebRequest implements Runnable {
             params.add(new BasicNameValuePair(key,_params.get(key)));
         }
     }
-
-    public void setParam(String key,String value){
-        if (params==null) params = new LinkedList<BasicNameValuePair>();
-        this.params.add(new BasicNameValuePair(key,value));
-    }
-
-    public void setHeaders(Map<String,String> headers){
-        this.headers = (HashMap<String,String>)headers;
-    }
-<<<<<<< HEAD
-  }
-
+  
   public void setParam(String key,String value){
     if (params==null) params = new LinkedList<BasicNameValuePair>();
     this.params.add(new BasicNameValuePair(key,value));
@@ -255,36 +191,7 @@ public class WebRequest implements Runnable {
   public void setHeaders(Map<String,String> headers){
     this.headers = (HashMap<String,String>)headers;
   }
-
   public void setConnectionTimeout(int connectionTimeout){
-    this.connectionTimeout = connectionTimeout;
-  }
-
-  public void setSoTimeout(int soTimeout){
-    this.soTimeout = soTimeout;
-  }
-
-  public Header[] getHeaders(){
-    if (response!=null) return response.getAllHeaders();
-    return null;
-  }
-
-  public void setMethod(short method){
-    this.method = method;
-  }
-
-  protected void onFinished(ResultObj resultObj){}
-
-  private static Handler handler = new Handler(){
-                                   @Override
-                                   public void handleMessage(Message msg){
-                                     WebRequest wq = (WebRequest)msg.obj;
-                                     wq.onFinished(wq.resultObj);
-                                   }
-                                 };
-=======
-
-    public void setConnectionTimeout(int connectionTimeout){
         this.connectionTimeout = connectionTimeout;
     }
 
@@ -321,6 +228,5 @@ public class WebRequest implements Runnable {
                                            wq.onFinished(wq.resultObj);
                                        }
                                    };
->>>>>>> b3a3867b86ded446fea022ae63b1ce587c34157d
-
+ 
 }
