@@ -24,9 +24,7 @@ import org.json.JSONObject;
 import android.os.Handler;
 import android.os.Message;
 
-import com.google.gson.Gson;
 import com.hzuhelper.config.StaticValues;
-import com.hzuhelper.model.receive.RECEIVE;
 
 public class WebRequest implements Runnable{
 
@@ -214,7 +212,6 @@ public class WebRequest implements Runnable{
   protected void onFinished(ResultObj resultObj){}
 
   private static Handler handler = new Handler(){
-                                   @SuppressWarnings({"unchecked","rawtypes"})
                                    @Override
                                    public void handleMessage(Message msg){
                                      WebRequest wq = (WebRequest)msg.obj;
