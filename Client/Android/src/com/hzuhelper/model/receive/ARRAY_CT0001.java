@@ -1,6 +1,6 @@
-package com.hzuhelper.model;
+package com.hzuhelper.model.receive;
 
-public class ChatTweetInfo {
+public class ARRAY_CT0001 {
     private int    id;
     private String content;
     private int    ding;

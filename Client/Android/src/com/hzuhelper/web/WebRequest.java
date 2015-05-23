@@ -26,6 +26,7 @@ import android.os.Message;
 
 import com.hzuhelper.config.StaticValues;
 
+<<<<<<< HEAD
 public class WebRequest implements Runnable{
 
   public static final short              METHOD_POST       = 1;
@@ -76,111 +77,174 @@ public class WebRequest implements Runnable{
     default:
       get();
       break;
-    }
-  }
+=======
+public class WebRequest implements Runnable {
 
-  private void post(){
-    httpClient.setCookieStore(cookieStore);
-    HttpPost postMethod = new HttpPost(baseUrl);
-    if (headers!=null) {
-      Set<String> c = headers.keySet();
-      for (String key : c) {
-        postMethod.addHeader(key,headers.get(key));
-      }
-    }
-    String result = null;
-    int state = ResultObj.STATE_SUCCESS;
-    String errorCode = null;
-    String errorMsg = null;
-    try {
-      if (params!=null) postMethod.setEntity(new UrlEncodedFormEntity(params,SYSTEM_ENCODING)); // 将参数填入POST
-      response = httpClient.execute(postMethod); // 执行POST方法
-      int statusCode = response.getStatusLine().getStatusCode(); // 获取响应码
-      result = EntityUtils.toString(response.getEntity(),SYSTEM_ENCODING); // 获取响应内容
-      CookiesUtils.getInstances().updateCookies(httpClient.getCookieStore());
-      if (statusCode!=HttpStatus.SC_OK) {
-        state = ResultObj.STATE_FAIL;
-        errorCode = ResultObj.ERRORCODE_CONNECTION;
-        errorMsg = "HttpStatus = "+statusCode;
-      }
-    } catch (Exception e) {
-      state = ResultObj.STATE_FAIL;
-      errorCode = ResultObj.ERRORCODE_CLIENT;
-      errorMsg = e.getMessage();
-      e.printStackTrace();
-    }
-    webRequestFinished(result,state,errorCode,errorMsg);
-  }
+    public static final short              METHOD_POST       = 1;
+    public static final short              METHOD_GET        = 0;
+    public static final String             SYSTEM_ENCODING   = "UTF-8";
 
-  public void get(){
-    HttpGet getMethod;
-    if (params!=null) {
-      String param = URLEncodedUtils.format(params,SYSTEM_ENCODING);
-      getMethod = new HttpGet(baseUrl+"?"+param);
-    } else {
-      getMethod = new HttpGet(baseUrl);
-    }
-    if (headers!=null) {
-      Set<String> c = headers.keySet();
-      for (String key : c) {
-        getMethod.addHeader(key,headers.get(key));
-      }
-    }
-    String result = null;
-    int state = ResultObj.STATE_SUCCESS;
-    String errorCode = null;
-    String errorMsg = null;
-    try {
-      response = httpClient.execute(getMethod); // 发起GET请求
-      int statusCode = response.getStatusLine().getStatusCode(); // 获取响应码
-      result = EntityUtils.toString(response.getEntity(),SYSTEM_ENCODING);// 获取服务器响应内容 
-      CookiesUtils.getInstances().updateCookies(httpClient.getCookieStore());
-      if (statusCode!=HttpStatus.SC_OK) {
-        state = ResultObj.STATE_FAIL;
-        errorCode = ResultObj.ERRORCODE_CONNECTION;
-        errorMsg = "HttpStatus = "+statusCode;
-      }
-    } catch (Exception e) {
-      state = ResultObj.STATE_FAIL;
-      errorCode = ResultObj.ERRORCODE_CLIENT;
-      errorMsg = e.getMessage();
-      e.printStackTrace();
-    }
-    webRequestFinished(result,state,errorCode,errorMsg);
-  }
+    private CookieStore                    cookieStore;
 
-  private void webRequestFinished(String result,int state,String errorCode,String errorMsg){
-    JSONObject jsonObject = null;
-    if (state!=ResultObj.STATE_FAIL) {
-      try {
-        jsonObject = new JSONObject(result);
-        state = jsonObject.getInt(StaticValues.state);
-        if (state==ResultObj.STATE_FAIL) {
-          errorMsg = jsonObject.getString(StaticValues.errorMsg);
-          errorCode = jsonObject.getString(StaticValues.errorCode);
+    private String                         baseUrl;
+    private LinkedList<BasicNameValuePair> params;
+    private HashMap<String,String>         headers;
+    private int                            connectionTimeout = 10000;
+    private int                            soTimeout         = 20000;
+    private short                          method;
+
+    private DefaultHttpClient              httpClient;
+    private HttpResponse                   response;
+
+    private ResultObj                      resultObj;
+
+    public WebRequest(String baseUrl,short method){
+        this(baseUrl);
+        this.method = method;
+>>>>>>> b3a3867b86ded446fea022ae63b1ce587c34157d
+    }
+
+    public WebRequest(String baseUrl){
+        this.baseUrl = baseUrl;
+        HttpParams httpParams = new BasicHttpParams();
+        HttpConnectionParams.setConnectionTimeout(httpParams,connectionTimeout);
+        HttpConnectionParams.setSoTimeout(httpParams,soTimeout);
+        this.httpClient = new DefaultHttpClient(httpParams);
+        this.cookieStore = CookiesUtils.getInstances().getCookieStore();
+    }
+
+    public void start(){
+        new Thread(this).start();
+    }
+
+    @Override
+    public void run(){
+        switch (method) {
+        case METHOD_POST:
+            post();
+            break;
+        case METHOD_GET:
+            get();
+            break;
+        default:
+            get();
+            break;
         }
-      } catch (Exception e) {
-        state = ResultObj.STATE_FAIL;
-        errorMsg = ResultObj.ERRORMSG_JSON;
-        errorCode = ResultObj.ERRORCODE_CLIENT;
-      }
     }
-    resultObj = new ResultObj(jsonObject,state,errorCode,errorMsg);
-    Message msg = new Message();
-    msg.obj = WebRequest.this;
-    handler.sendMessage(msg);
-  }
 
-  /**
-   * 私有变量get和set
-   * @param _params
-   */
-  public void setParams(HashMap<String,String> _params){
-    params = new LinkedList<BasicNameValuePair>();
-    Set<String> keys = _params.keySet();
-    for (String key : keys) {
-      params.add(new BasicNameValuePair(key,_params.get(key)));
+    private void post(){
+        httpClient.setCookieStore(cookieStore);
+        HttpPost postMethod = new HttpPost(baseUrl);
+        if (headers!=null) {
+            Set<String> c = headers.keySet();
+            for (String key : c) {
+                postMethod.addHeader(key,headers.get(key));
+            }
+        }
+        String result = null;
+        int state = ResultObj.STATE_SUCCESS;
+        String errorCode = null;
+        String errorMsg = null;
+        try {
+            if (params!=null) postMethod.setEntity(new UrlEncodedFormEntity(params,SYSTEM_ENCODING)); // 将参数填入POST
+            response = httpClient.execute(postMethod); // 执行POST方法
+            int statusCode = response.getStatusLine().getStatusCode(); // 获取响应码
+            result = EntityUtils.toString(response.getEntity(),SYSTEM_ENCODING); // 获取响应内容
+            CookiesUtils.getInstances().updateCookies(httpClient.getCookieStore());
+            if (statusCode!=HttpStatus.SC_OK) {
+                state = ResultObj.STATE_FAIL;
+                errorCode = ResultObj.ERRORCODE_CONNECTION;
+                errorMsg = "HttpStatus = "+statusCode;
+            }
+        } catch (Exception e) {
+            state = ResultObj.STATE_FAIL;
+            errorCode = ResultObj.ERRORCODE_CLIENT;
+            errorMsg = e.getMessage();
+            e.printStackTrace();
+        }
+        webRequestFinished(result,state,errorCode,errorMsg);
     }
+
+    public void get(){
+        HttpGet getMethod;
+        if (params!=null) {
+            String param = URLEncodedUtils.format(params,SYSTEM_ENCODING);
+            getMethod = new HttpGet(baseUrl+"?"+param);
+        } else {
+            getMethod = new HttpGet(baseUrl);
+        }
+        if (headers!=null) {
+            Set<String> c = headers.keySet();
+            for (String key : c) {
+                getMethod.addHeader(key,headers.get(key));
+            }
+        }
+        String result = null;
+        int state = ResultObj.STATE_SUCCESS;
+        String errorCode = null;
+        String errorMsg = null;
+        try {
+            response = httpClient.execute(getMethod); // 发起GET请求
+            int statusCode = response.getStatusLine().getStatusCode(); // 获取响应码
+            result = EntityUtils.toString(response.getEntity(),SYSTEM_ENCODING);// 获取服务器响应内容 
+            CookiesUtils.getInstances().updateCookies(httpClient.getCookieStore());
+            if (statusCode!=HttpStatus.SC_OK) {
+                state = ResultObj.STATE_FAIL;
+                errorCode = ResultObj.ERRORCODE_CONNECTION;
+                errorMsg = "HttpStatus = "+statusCode;
+            }
+        } catch (Exception e) {
+            state = ResultObj.STATE_FAIL;
+            errorCode = ResultObj.ERRORCODE_CLIENT;
+            errorMsg = e.getMessage();
+            e.printStackTrace();
+        }
+        webRequestFinished(result,state,errorCode,errorMsg);
+    }
+
+    private void webRequestFinished(String result,int state,String errorCode,String errorMsg){
+        JSONObject jsonObject = null;
+        if (state!=ResultObj.STATE_FAIL) {
+            try {
+                jsonObject = new JSONObject(result);
+                state = jsonObject.getInt(StaticValues.state);
+                if (state==ResultObj.STATE_FAIL) {
+                    errorMsg = jsonObject.getString(StaticValues.errorMsg);
+                    errorCode = jsonObject.getString(StaticValues.errorCode);
+                }
+            } catch (Exception e) {
+                state = ResultObj.STATE_FAIL;
+                errorMsg = ResultObj.ERRORMSG_JSON;
+                errorCode = ResultObj.ERRORCODE_CLIENT;
+            }
+        }
+        resultObj = new ResultObj(result,state,errorCode,errorMsg);
+        Message msg = new Message();
+        msg.obj = WebRequest.this;
+        handler.sendMessage(msg);
+    }
+
+    /**
+     * 私有变量get和set
+     * @param _params
+     */
+    public void setParams(HashMap<String,String> _params){
+        params = new LinkedList<BasicNameValuePair>();
+        Set<String> keys = _params.keySet();
+        for (String key : keys) {
+            params.add(new BasicNameValuePair(key,_params.get(key)));
+        }
+    }
+
+    public void setParam(String key,String value){
+        if (params==null) params = new LinkedList<BasicNameValuePair>();
+        this.params.add(new BasicNameValuePair(key,value));
+    }
+
+    public void setHeaders(Map<String,String> headers){
+        this.headers = (HashMap<String,String>)headers;
+    }
+<<<<<<< HEAD
   }
 
   public void setParam(String key,String value){
@@ -218,5 +282,45 @@ public class WebRequest implements Runnable{
                                      wq.onFinished(wq.resultObj);
                                    }
                                  };
+=======
+
+    public void setConnectionTimeout(int connectionTimeout){
+        this.connectionTimeout = connectionTimeout;
+    }
+
+    public void setSoTimeout(int soTimeout){
+        this.soTimeout = soTimeout;
+    }
+
+    public Header[] getHeaders(){
+        if (response!=null) return response.getAllHeaders();
+        return null;
+    }
+
+    public void setMethod(short method){
+        this.method = method;
+    }
+
+    protected void onFinished(ResultObj resultObj){
+        if (resultObj.getState()==ResultObj.STATE_SUCCESS) {
+            onSuccess(resultObj);
+        } else {
+            onFailure(resultObj);
+        }
+    }
+
+    protected void onSuccess(ResultObj resultObj){}
+
+    protected void onFailure(ResultObj resultObj){}
+
+    private static Handler handler = new Handler() {
+                                       @SuppressWarnings({"unchecked","rawtypes"})
+                                       @Override
+                                       public void handleMessage(Message msg){
+                                           WebRequest wq = (WebRequest)msg.obj;
+                                           wq.onFinished(wq.resultObj);
+                                       }
+                                   };
+>>>>>>> b3a3867b86ded446fea022ae63b1ce587c34157d
 
 }

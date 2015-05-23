@@ -3,9 +3,9 @@ package com.hzuhelper.activity;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,7 +19,7 @@ import com.hzuhelper.activity.score.List;
 import com.hzuhelper.activity.takeout.ResList;
 import com.slidingmenu.lib.SlidingMenu;
 
-public class BaseActivity extends Activity{
+public class BaseActivity extends FragmentActivity{
 
   @Override
   protected void onCreate(Bundle savedInstanceState){
