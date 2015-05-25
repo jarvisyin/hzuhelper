@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.hzuhelper.AppContext;
 import com.hzuhelper.R;
 import com.hzuhelper.activity.BaseActivity;
+import com.hzuhelper.config.staticURL;
 import com.hzuhelper.database.CourseDB;
 import com.hzuhelper.model.CourseInfo;
 import com.hzuhelper.server.CourseService;
@@ -36,13 +37,8 @@ import com.hzuhelper.web.WebRequest;
 
 public class Table extends BaseActivity{
 
-  private final int              REUQEST_DATA_FAIL = 0;
-  private final int              WEBREUQEST_FAIL   = 1;
-  private final int              REQUEST_SUCCESS   = 2;
-  private final int              UNKNOWN_ERROR     = 3;
-
-  private final int              WC                = ViewGroup.LayoutParams.WRAP_CONTENT;
-  private final int              MP                = ViewGroup.LayoutParams.MATCH_PARENT;
+  private final int              WC          = ViewGroup.LayoutParams.WRAP_CONTENT;
+  private final int              MP          = ViewGroup.LayoutParams.MATCH_PARENT;
   private int                    tv_height_1;
   private int                    tv_height_2;
   private int                    tv_width_1;
@@ -53,7 +49,7 @@ public class Table extends BaseActivity{
   private LayoutParams           lp_llo;
   private LayoutParams           lp_tv;
   private CourseView             tv;
-  private boolean[][]            courseTime        = new boolean[8][13];
+  private boolean[][]            courseTime  = new boolean[8][13];
   private CourseInfo             model;
 
   private int                    textViewid;
@@ -61,10 +57,10 @@ public class Table extends BaseActivity{
   private Button                 btn_getCourse;
   private ProgressDialog         myDialog;
   private String                 username;
-  private int                    colorrgbTag       = 0;
-  private String[]               WeekDay           = {"一","二","三","四","五","六","日"};
-  private int                    colorrgb[]        = {Color.rgb(113,187,172),Color.rgb(168,157,218),Color.rgb(158,201,108),Color.rgb(87,183,229),Color.rgb(213,142,180),
-      Color.rgb(255,215,0),Color.rgb(255,160,122)  };
+  private int                    colorrgbTag = 0;
+  private String[]               WeekDay     = {"一","二","三","四","五","六","日"};
+  private int                    colorrgb[]  = {Color.rgb(113,187,172),Color.rgb(168,157,218),Color.rgb(158,201,108),Color.rgb(87,183,229),Color.rgb(213,142,180),
+      Color.rgb(255,215,0),Color.rgb(255,160,122)};
   private LinkedList<CourseInfo> clist;
 
   @Override
@@ -72,7 +68,7 @@ public class Table extends BaseActivity{
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_course_table);
     slidingMenuInit();
-    
+
     llo_courseTable = (LinearLayout)findViewById(R.id.llo_courseTable);
     llo_head = (LinearLayout)findViewById(R.id.llo_head);
     btn_getCourse = (Button)findViewById(R.id.btn_right);
@@ -206,39 +202,6 @@ public class Table extends BaseActivity{
   }
 
   /**
-   * 从服务端获取数据并进行处理
-   */
-  private Runnable        getCourseFromServerRunable = new Runnable(){
-                                                       public void run(){
-                                                         WebRequest webreq = new WebRequest(ConstantStrUtil.DOMAINNAME+ConstantStrUtil.URL_PATH_COURSE_GET);
-                                                         HashMap<String,String> params = WebRequest.getUserInfo(getApplicationContext());
-                                                         webreq.setParams(params);
-                                                         String json = webreq.post();
-                                                         if (json==null||json.equals("")) {
-                                                           handler.sendEmptyMessage(WEBREUQEST_FAIL);
-                                                           return;
-                                                         }
-                                                         try {
-                                                           JSONObject jb = new JSONObject(json);
-                                                           if (jb.getString(ConstantStrUtil.STR_STATU).equals("false")) {
-                                                             handler.sendEmptyMessage(REUQEST_DATA_FAIL);
-                                                             return;
-                                                             // "无法获取数据！"
-                                                           }
-                                                           CourseService.resolveJsonString(jb.getJSONArray(ConstantStrUtil.STR_RESPONSE),getApplication());
-                                                           handler.sendEmptyMessage(REQUEST_SUCCESS);
-                                                         } catch (Exception e) {
-                                                           Message msg = new Message();
-                                                           Bundle data = new Bundle();
-                                                           msg.what = UNKNOWN_ERROR;
-                                                           data.putString(ConstantStrUtil.STR_ERRMSG,e.toString());
-                                                           msg.setData(data);
-                                                           handler.sendMessage(msg);
-                                                         }
-                                                       }
-                                                     };
-
-  /**
    * 一键导入按钮监听事件
    */
   private OnClickListener btn_getCourseClickListener = new OnClickListener(){
@@ -250,11 +213,17 @@ public class Table extends BaseActivity{
                                                            @Override
                                                            public void onClick(DialogInterface dialog,int which){
                                                              myDialog = ProgressDialog.show(Table.this,null,"获取中...");
-                                                             SharedPreferences sp = getSharedPreferences(ConstantStrUtil.COMMON_XML_NAME,Context.MODE_PRIVATE);
-                                                             username = sp.getString(ConstantStrUtil.USERNAME,null);
-                                                             if (username!=null) {
-                                                               new Thread(getCourseFromServerRunable).start();
-                                                             } else myDialog.dismiss();
+                                                             WebRequest webreq = new WebRequest(staticURL.URL_PATH_COURSE_GET){
+                                                               protected void onFinished(com.hzuhelper.web.ResultObj resultObj){
+                                                                 //TODO CourseService.resolveJsonString(resultObj.getResult().getJSONArray(ConstantStrUtil.STR_RESPONSE),getApplication());
+                                                                 Intent mIntent = new Intent();
+                                                                 mIntent.setClass(Table.this,Table.class);
+                                                                 startActivity(mIntent);
+                                                                 Table.this.finish();
+                                                                 myDialog.dismiss();
+                                                               }
+                                                             };
+                                                             webreq.start();
                                                            }
                                                          });
                                                          adb.setNegativeButton("取消",null);
@@ -309,33 +278,6 @@ public class Table extends BaseActivity{
                                                            view.setText("+");
                                                            textViewid = view.getId();
                                                          }
-                                                       }
-                                                     };
-
-  private Handler         handler                    = new Handler(){
-                                                       public void handleMessage(Message msg){
-                                                         switch (msg.what) {
-                                                         case REQUEST_SUCCESS:
-                                                           Intent mIntent = new Intent();
-                                                           mIntent.setClass(Table.this,Table.class);
-                                                           startActivity(mIntent);
-                                                           Table.this.finish();
-                                                           break;
-                                                         case UNKNOWN_ERROR:
-                                                           Bundle data = msg.getData();
-                                                           data.getString(ConstantStrUtil.STR_ERRMSG);
-                                                           Toast.makeText(Table.this,data.getString(ConstantStrUtil.STR_ERRMSG),Toast.LENGTH_LONG).show();
-                                                           break;
-                                                         case WEBREUQEST_FAIL:
-                                                           Toast.makeText(Table.this,"网络连接失败!",Toast.LENGTH_LONG).show();
-                                                           break;
-                                                         case REUQEST_DATA_FAIL:
-                                                           Toast.makeText(Table.this,"获取数据失败!",Toast.LENGTH_LONG).show();
-                                                           break;
-                                                         default:
-                                                           break;
-                                                         }
-                                                         myDialog.dismiss();
                                                        }
                                                      };
 

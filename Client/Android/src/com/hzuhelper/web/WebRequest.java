@@ -25,7 +25,7 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.hzuhelper.config.StaticValues;
-
+ 
 public class WebRequest implements Runnable {
 
     public static final short              METHOD_POST       = 1;
@@ -48,7 +48,7 @@ public class WebRequest implements Runnable {
 
     public WebRequest(String baseUrl,short method){
         this(baseUrl);
-        this.method = method;
+        this.method = method; 
     }
 
     public WebRequest(String baseUrl){
@@ -182,17 +182,16 @@ public class WebRequest implements Runnable {
             params.add(new BasicNameValuePair(key,_params.get(key)));
         }
     }
+  
+  public void setParam(String key,String value){
+    if (params==null) params = new LinkedList<BasicNameValuePair>();
+    this.params.add(new BasicNameValuePair(key,value));
+  }
 
-    public void setParam(String key,String value){
-        if (params==null) params = new LinkedList<BasicNameValuePair>();
-        this.params.add(new BasicNameValuePair(key,value));
-    }
-
-    public void setHeaders(Map<String,String> headers){
-        this.headers = (HashMap<String,String>)headers;
-    }
-
-    public void setConnectionTimeout(int connectionTimeout){
+  public void setHeaders(Map<String,String> headers){
+    this.headers = (HashMap<String,String>)headers;
+  }
+  public void setConnectionTimeout(int connectionTimeout){
         this.connectionTimeout = connectionTimeout;
     }
 
@@ -229,5 +228,5 @@ public class WebRequest implements Runnable {
                                            wq.onFinished(wq.resultObj);
                                        }
                                    };
-
+ 
 }

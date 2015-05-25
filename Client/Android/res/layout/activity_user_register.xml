@@ -43,6 +43,7 @@
             android:layout_marginRight="3dp"
             android:background="@drawable/btn_bg_orange"
             android:gravity="center"
+            android:onClick="getCode()"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:text="@string/huoquyanzhema"
