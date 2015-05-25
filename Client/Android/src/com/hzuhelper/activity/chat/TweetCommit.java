@@ -1,10 +1,7 @@
 package com.hzuhelper.activity.chat;
 
-import org.json.JSONObject;
-
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -12,7 +9,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.hzuhelper.R;
 import com.hzuhelper.activity.BaseActivity;
@@ -20,7 +16,6 @@ import com.hzuhelper.config.StaticData;
 import com.hzuhelper.config.StaticValues;
 import com.hzuhelper.config.staticURL;
 import com.hzuhelper.model.receive.ARRAY_P6003;
-import com.hzuhelper.tools.ConstantStrUtil;
 import com.hzuhelper.tools.ToastUtil;
 import com.hzuhelper.web.ResultObj;
 import com.hzuhelper.web.WebRequest;

@@ -57,6 +57,10 @@ public class WebRequest implements Runnable{
         this.cookieStore = CookiesUtils.getInstances().getCookieStore();
     }
 
+    public WebRequest(String baseUrl,short method){
+        this(staticURL.DOMAINNAME, baseUrl, METHOD_POST);
+    }
+
     public WebRequest(String domain,String baseUrl){
         this(domain, baseUrl, METHOD_POST);
     }
