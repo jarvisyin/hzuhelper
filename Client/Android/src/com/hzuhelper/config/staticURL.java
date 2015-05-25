@@ -1,10 +1,11 @@
 package com.hzuhelper.config;
- 
- 
-public class staticURL {
- 
+
+public class staticURL{
+
+    public static String       DOMAINNAME                        = "http://hzuhelper.sinaapp.com";
     public static final String URL                               = "http://www.hzuhelper.com";
-    public static final String DOMAINNAME                        = "http://hzuhelper.sinaapp.com";
+    public static final String get_url                           = "/get/url";
+    public static final String app_update                        = "/app/update";
     public static final String URL_PATH_TERMSTARTTIME_GET        = "/course/gettermstarttime";
     public static final String URL_PATH_INIT                     = "/clientinit";
     public static final String URL_PATH_COURSE_GET               = "/course/get";
@@ -19,7 +20,7 @@ public class staticURL {
     public static final String menu_itemgetlist                  = "/menu/itemgetlist";
     public static final String menu_restaurantgetlist            = "/menu/restaurantgetlist";
     public static final String takeout_restaurant_comment_commit = "/takeout/restaurant/comment/commit";
- 
-  public static final String users_register               = "/users/register";
-  public static final String getcode                      = "/getcode";
+
+    public static final String users_register                    = "/users/register";
+    public static final String getcode                           = "/getcode";
 }

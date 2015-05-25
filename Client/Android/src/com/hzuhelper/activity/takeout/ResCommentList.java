@@ -1,25 +1,18 @@
 package com.hzuhelper.activity.takeout;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Toast;
 
 import com.hzuhelper.R;
 import com.hzuhelper.activity.BaseActivity;
 import com.hzuhelper.activity.chat.TweetCommit;
 import com.hzuhelper.adapter.TweetAdapter;
 import com.hzuhelper.config.StaticValues;
+import com.hzuhelper.config.staticURL;
 import com.hzuhelper.model.receive.ARRAY_CT0001;
 import com.hzuhelper.model.receive.CT0001;
 import com.hzuhelper.tools.ConstantStrUtil;
@@ -31,7 +24,7 @@ import com.hzuhelper.wedget.RefreshAbleListView;
 import com.hzuhelper.wedget.RefreshAbleListView.OnGetMoreDateListener;
 import com.hzuhelper.wedget.RefreshAbleListView.OnRefreshListener;
 
-public class ResCommentList extends BaseActivity implements OnClickListener {
+public class ResCommentList extends BaseActivity implements OnClickListener{
 
     private RefreshAbleListView     listview;
     private ArrayList<ARRAY_CT0001> list1;
@@ -56,12 +49,12 @@ public class ResCommentList extends BaseActivity implements OnClickListener {
         adapter = new TweetAdapter(list1,ResCommentList.this);
         listview = (RefreshAbleListView)findViewById(R.id.listView);
         listview.setAdapter(adapter);
-        listview.setonRefreshListener(new OnRefreshListener() {
+        listview.setonRefreshListener(new OnRefreshListener(){
             public void onRefresh(){
                 refresh();
             }
         });
-        listview.setonGetMoreDateListene(new OnGetMoreDateListener() {
+        listview.setonGetMoreDateListene(new OnGetMoreDateListener(){
             public void onGetMoreDate(){
                 getMoreDate();
             }
@@ -72,7 +65,7 @@ public class ResCommentList extends BaseActivity implements OnClickListener {
      * 刷新
      */
     private void refresh(){
-        WebRequest wq = new WebRequest(ConstantStrUtil.URL_PATH_CHAT_TWEET_GETLIST) {
+        WebRequest wq = new WebRequest(staticURL.URL_PATH_CHAT_TWEET_GETLIST){
             @Override
             protected void onFailure(ResultObj resultObj){
                 ToastUtil.show(resultObj);
@@ -105,7 +98,7 @@ public class ResCommentList extends BaseActivity implements OnClickListener {
         int listSize = 0;
         if ((listSize = list1.size())<1) return;
         ARRAY_CT0001 model = list1.get(listSize-1);
-        WebRequest wq = new WebRequest(ConstantStrUtil.URL_PATH_CHAT_TWEET_GETLIST) {
+        WebRequest wq = new WebRequest(staticURL.URL_PATH_CHAT_TWEET_GETLIST){
             @Override
             protected void onFailure(ResultObj resultObj){
                 ToastUtil.show(resultObj);

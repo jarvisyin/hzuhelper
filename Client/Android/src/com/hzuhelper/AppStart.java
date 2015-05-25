@@ -3,10 +3,8 @@ package com.hzuhelper;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import org.json.JSONArray;
@@ -14,12 +12,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
@@ -35,114 +30,130 @@ import com.hzuhelper.activity.user.Login;
 import com.hzuhelper.config.StaticValues;
 import com.hzuhelper.config.staticURL;
 import com.hzuhelper.database.CourseDB;
-import com.hzuhelper.database.DAOHelper;
 import com.hzuhelper.database.ScoreDB;
 import com.hzuhelper.model.ScoreInfo;
+import com.hzuhelper.model.receive.P6000;
+import com.hzuhelper.model.receive.P6001;
 import com.hzuhelper.server.CourseService;
 import com.hzuhelper.tools.ConstantStrUtil;
+import com.hzuhelper.tools.SPFUtils;
+import com.hzuhelper.tools.ToastUtil;
+import com.hzuhelper.web.JSONUtils;
+import com.hzuhelper.web.ResultObj;
 import com.hzuhelper.web.WebRequest;
 
-public class AppStart extends BaseActivity {
+public class AppStart extends BaseActivity{
 
-    private String            username;
-    private String            password;
-    private String            score_updateTime;
-    private String            result;
-    private SharedPreferences sp;
-    private int               courseCount;
-    private Editor            ed;
-    private Date              date               = new Date();
-    private int               local_versionCode;
-    private TextView          tv_info;
-    private String            tv_infoText;
-    private String            appDownLoadURL;
-
-    private final int         CHANGE_TV_INFOTEXT = 5;
-    private String            errorMsg;
+    private String   score_updateTime;
+    private String   result;
+    private int      courseCount;
+    private Date     date = new Date();
+    private int      local_versionCode;
+    private TextView tvInfo;
+    private String   appDownLoadURL;
+    private String   errorMsg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        sp = getSharedPreferences(ConstantStrUtil.COMMON_XML_NAME,Context.MODE_PRIVATE);
-        ed = sp.edit();
-
-        loadingStyle();
-        initDB();
+        tvInfo = (TextView)findViewById(R.id.tv_info);
+        handle.sendEmptyMessageDelayed(0,300);
+        getURL();
         initSimnulateServer();
     }
 
-    private void loadingStyle(){
-        tv_info = (TextView)findViewById(R.id.tv_info);
-        new Thread(new Runnable() {
-            public void run(){
-                for (int i = 0; true; i++) {
-                    switch (i%5) {
-                    case 0:
-                        tv_infoText = "    Loading    ";
-                        break;
-                    case 1:
-                        tv_infoText = "    Loading.   ";
-                        break;
-                    case 2:
-                        tv_infoText = "    Loading..  ";
-                        break;
-                    case 3:
-                        tv_infoText = "    Loading... ";
-                        break;
-                    default:
-                        tv_infoText = "    Loading....";
-                        break;
-                    }
-                    handler.sendEmptyMessage(CHANGE_TV_INFOTEXT);
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
+    @Override
+    protected void onPause(){
+        tag = -1;
     }
 
-    private void initDB(){
-        List<String> createTableCommanders = new ArrayList<String>();
-        createTableCommanders.add(CourseDB.createTableCommander());
-        createTableCommanders.add(ScoreDB.createTableCommander());
-        DAOHelper.createTableCommanders = createTableCommanders;
+    private int     tag;
+    private Handler handle = new Handler(){
+
+                               @Override
+                               public void handleMessage(Message msg){
+                                   if (tag<0) return;
+                                   switch (tag%4) {
+                                   case 0:
+                                       tvInfo.setText("    Loading    ");
+                                       break;
+                                   case 1:
+                                       tvInfo.setText("    Loading.   ");
+                                       break;
+                                   case 2:
+                                       tvInfo.setText("    Loading..  ");
+                                       break;
+                                   case 3:
+                                       tvInfo.setText("    Loading... ");
+                                       break;
+                                   }
+                                   tag++;
+                                   handle.sendEmptyMessageDelayed(0,500);
+                               }
+                           };
+
+    private void getURL(){
+        WebRequest wq = new WebRequest(staticURL.URL,staticURL.get_url){
+            @Override
+            protected void onSuccess(ResultObj resultObj){
+                P6000 p6000 = JSONUtils.fromJson(resultObj,P6000.class);
+                staticURL.DOMAINNAME = p6000.getURL();
+            }
+
+            @Override
+            protected void onFailure(ResultObj resultObj){
+                ToastUtil.show(resultObj);
+                getCourse();
+            }
+        };
+        wq.start();
     }
 
     private void initSimnulateServer(){
-        new Thread(new Runnable() {
-            public void run(){
-                getDataFromServer();
-            }
-        }).start();
-    }
 
-    private void getDataFromServer(){
         /**
          * 获取本地数据
          */
-        // 获取本地最近一次更新成绩的时间
-        score_updateTime = sp.getString("scoreUpdateTime",ConstantStrUtil.APP_STARTTIME);
         // 获取当前app版本号
+        int localVersionCode = 0;
         try {
-            local_versionCode = getPackageManager().getPackageInfo(getPackageName(),PackageManager.GET_CONFIGURATIONS).versionCode;
+            localVersionCode = getPackageManager().getPackageInfo(getPackageName(),PackageManager.GET_CONFIGURATIONS).versionCode;
         } catch (NameNotFoundException e1) {
-            e1.printStackTrace();
-            handler.sendEmptyMessage(GET_VERSIONCODE_FAIL);
+            ToastUtil.show("无法获取app版本!");
+            getCourse();
             return;
         }
+        WebRequest wq = new WebRequest(staticURL.app_update){
+            @Override
+            protected void onSuccess(ResultObj resultObj){
+                P6001 p6001 = JSONUtils.fromJson(resultObj,P6001.class);
+                if ("2".equals(p6001.getNeedToUpdate())) {
+                    getCourse();
+                } else if ("3".equals(p6001.getNeedToUpdate())) {
+                    getCourse();
+                } else {
+                    getCourse();
+                }
+            }
+
+            @Override
+            protected void onFailure(ResultObj resultObj){
+                ToastUtil.show(resultObj);
+                getCourse();
+            }
+        };
+
         // 获取成绩数目
         int scoreCount = CourseDB.count();
         // 获取课程数目
         courseCount = CourseDB.count();
 
+        // 获取本地最近一次更新成绩的时间 ,ConstantStrUtil.APP_STARTTIME
+        score_updateTime = SPFUtils.get("scoreUpdateTime");
         // 获取帐号密码
-        username = sp.getString(ConstantStrUtil.USERNAME,"");
-        password = sp.getString(ConstantStrUtil.PASSWORD,"");
+        /*username = sp.getString(ConstantStrUtil.USERNAME,"");
+        password = sp.getString(ConstantStrUtil.PASSWORD,"");*/
         /**
          * 从服务端获取数据
          */
@@ -197,8 +208,7 @@ public class AppStart extends BaseActivity {
 
             // 更新需要公布的消息(成绩模块)
             if (!json.getString("scoreMsg").equals("null")) {
-                ed.putString("scoreMsg",json.getString("scoreMsg"));
-                ed.commit();
+                SPFUtils.put("scoreMsg",json.getString("scoreMsg"));
             }
 
             handler.sendEmptyMessage(GET_DATA_SUCCESS);
@@ -209,16 +219,20 @@ public class AppStart extends BaseActivity {
         }
     }
 
+    private void getCourse(){
+
+    }
+
     protected void appUpdate(){
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         // alert.setTitle("软件升级");
         alert.setMessage("发现新版本,建议立即更新使用.");
-        alert.setPositiveButton("暂时退出\n以后再说",new OnClickListener() {
+        alert.setPositiveButton("暂时退出\n以后再说",new OnClickListener(){
             public void onClick(DialogInterface dialog,int which){
                 finish();
             }
         });
-        alert.setNegativeButton("立即更新",new DialogInterface.OnClickListener() {
+        alert.setNegativeButton("立即更新",new DialogInterface.OnClickListener(){
             public void onClick(DialogInterface dialog,int which){
                 // 开启更新服务UpdateService
                 // 这里为了把update更好模块化，可以传一些updateService依赖的值
@@ -256,15 +270,14 @@ public class AppStart extends BaseActivity {
             ScoreDB.save(model);
         }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.getDefault());
-        ed.putString("scoreUpdateTime",sdf.format(date));
-        ed.commit();
+
+        SPFUtils.put("scoreUpdateTime",sdf.format(date));
     }
 
     private void termStartTimeDealing(String termStartDate) throws JSONException{
         try {
-            // 更新开学年月日
-            ed.putString(ConstantStrUtil.TERM_START_DATE,termStartDate);
-            ed.commit();
+            // 更新开学年月日 
+            SPFUtils.put(ConstantStrUtil.TERM_START_DATE,termStartDate);
             // 更新开学周数
             DateFormat sf = DateFormat.getDateInstance();
             Calendar cd = Calendar.getInstance();
@@ -273,8 +286,7 @@ public class AppStart extends BaseActivity {
             int a = cd.get(Calendar.WEEK_OF_YEAR);
             cd.setTime(new Date());
             int b = cd.get(Calendar.WEEK_OF_YEAR);
-            ed.putInt(ConstantStrUtil.TERM_START_WEEK,b-a+1);
-            ed.commit();
+            SPFUtils.put(ConstantStrUtil.TERM_START_WEEK,String.valueOf(b-a+1));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -285,16 +297,11 @@ public class AppStart extends BaseActivity {
     private final int GET_DATA_FAIL        = 2;
     private final int LOGIN_FAIL           = 3;
     private final int GET_DATA_SUCCESS     = 4;
-    private Handler   handler              = new Handler() {
+    private Handler   handler              = new Handler(){
                                                public void handleMessage(Message msg){
                                                    switch (msg.what) {
                                                    case APP_UPDATE:
                                                        appUpdate();
-                                                       break;
-                                                   case GET_VERSIONCODE_FAIL:
-                                                       Toast.makeText(AppStart.this,"获取app版本失败!",Toast.LENGTH_SHORT).show();
-                                                       startActivity(new Intent(AppStart.this,TweetList.class));
-                                                       AppStart.this.finish();
                                                        break;
                                                    case GET_DATA_FAIL:
                                                        Toast.makeText(AppStart.this,"获取数据失败!",Toast.LENGTH_LONG).show();
@@ -306,9 +313,7 @@ public class AppStart extends BaseActivity {
                                                        startActivity(new Intent(AppStart.this,Login.class));
                                                        AppStart.this.finish();
                                                        break;
-                                                   case CHANGE_TV_INFOTEXT:
-                                                       tv_info.setText(tv_infoText);
-                                                       break;
+
                                                    case GET_DATA_SUCCESS:
                                                        startActivity(new Intent(AppStart.this,TweetList.class));
                                                        AppStart.this.finish();

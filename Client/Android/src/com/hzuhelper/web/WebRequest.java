@@ -25,8 +25,9 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.hzuhelper.config.StaticValues;
- 
-public class WebRequest implements Runnable {
+import com.hzuhelper.config.staticURL;
+
+public class WebRequest implements Runnable{
 
     public static final short              METHOD_POST       = 1;
     public static final short              METHOD_GET        = 0;
@@ -46,18 +47,22 @@ public class WebRequest implements Runnable {
 
     private ResultObj                      resultObj;
 
-    public WebRequest(String baseUrl,short method){
-        this(baseUrl);
-        this.method = method; 
-    }
-
-    public WebRequest(String baseUrl){
-        this.baseUrl = baseUrl;
+    public WebRequest(String domain,String baseUrl,short method){
+        this.method = method;
+        this.baseUrl = domain+baseUrl;
         HttpParams httpParams = new BasicHttpParams();
         HttpConnectionParams.setConnectionTimeout(httpParams,connectionTimeout);
         HttpConnectionParams.setSoTimeout(httpParams,soTimeout);
         this.httpClient = new DefaultHttpClient(httpParams);
         this.cookieStore = CookiesUtils.getInstances().getCookieStore();
+    }
+
+    public WebRequest(String domain,String baseUrl){
+        this(domain, baseUrl, METHOD_POST);
+    }
+
+    public WebRequest(String baseUrl){
+        this(staticURL.DOMAINNAME, baseUrl);
     }
 
     public void start(){
@@ -182,16 +187,17 @@ public class WebRequest implements Runnable {
             params.add(new BasicNameValuePair(key,_params.get(key)));
         }
     }
-  
-  public void setParam(String key,String value){
-    if (params==null) params = new LinkedList<BasicNameValuePair>();
-    this.params.add(new BasicNameValuePair(key,value));
-  }
 
-  public void setHeaders(Map<String,String> headers){
-    this.headers = (HashMap<String,String>)headers;
-  }
-  public void setConnectionTimeout(int connectionTimeout){
+    public void setParam(String key,String value){
+        if (params==null) params = new LinkedList<BasicNameValuePair>();
+        this.params.add(new BasicNameValuePair(key,value));
+    }
+
+    public void setHeaders(Map<String,String> headers){
+        this.headers = (HashMap<String,String>)headers;
+    }
+
+    public void setConnectionTimeout(int connectionTimeout){
         this.connectionTimeout = connectionTimeout;
     }
 
@@ -220,7 +226,7 @@ public class WebRequest implements Runnable {
 
     protected void onFailure(ResultObj resultObj){}
 
-    private static Handler handler = new Handler() {
+    private static Handler handler = new Handler(){
                                        @SuppressWarnings({"unchecked","rawtypes"})
                                        @Override
                                        public void handleMessage(Message msg){
@@ -228,5 +234,5 @@ public class WebRequest implements Runnable {
                                            wq.onFinished(wq.resultObj);
                                        }
                                    };
- 
+
 }
