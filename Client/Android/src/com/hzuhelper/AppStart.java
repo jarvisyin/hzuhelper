@@ -11,19 +11,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
+import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.widget.TextView;
+import android.view.View;
 import android.widget.Toast;
 
-import com.hzuhelper.activity.AppUpdateService;
 import com.hzuhelper.activity.BaseActivity;
 import com.hzuhelper.activity.chat.TweetList;
 import com.hzuhelper.activity.user.Login;
@@ -31,118 +27,61 @@ import com.hzuhelper.config.StaticValues;
 import com.hzuhelper.config.staticURL;
 import com.hzuhelper.database.CourseDB;
 import com.hzuhelper.database.ScoreDB;
-import com.hzuhelper.model.ScoreInfo;
-import com.hzuhelper.model.receive.P6000;
-import com.hzuhelper.model.receive.P6001;
-import com.hzuhelper.server.CourseService;
-import com.hzuhelper.tools.ConstantStrUtil;
-import com.hzuhelper.tools.SPFUtils;
-import com.hzuhelper.tools.ToastUtil;
-import com.hzuhelper.web.JSONUtils;
-import com.hzuhelper.web.ResultObj;
-import com.hzuhelper.web.WebRequest;
+import com.hzuhelper.model.receive.P6006;
+import com.hzuhelper.utils.ConstantStrUtil;
+import com.hzuhelper.utils.SPFUtils;
+import com.hzuhelper.utils.web.WebRequest;
+import com.hzuhelper.wedget.AlertDialog;
 
 public class AppStart extends BaseActivity{
 
-    private String   score_updateTime;
-    private String   result;
-    private int      courseCount;
-    private Date     date = new Date();
-    private int      local_versionCode;
-    private TextView tvInfo;
-    private String   appDownLoadURL;
-    private String   errorMsg;
+    private String score_updateTime;
+    private String result;
+    private int    courseCount;
+    private Date   date = new Date();
+    private int    local_versionCode;
+    private String appDownLoadURL;
+    private String errorMsg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        tvInfo = (TextView)findViewById(R.id.tv_info);
-        handle.sendEmptyMessageDelayed(0,300);
-        getURL();
-        initSimnulateServer();
+        handle.sendEmptyMessageDelayed(0,500);
     }
 
-    @Override
-    protected void onPause(){
-        tag = -1;
+    private void checkOutApp(){
+        final AlertDialog dialog = new AlertDialog(AppStart.this);
+        dialog.setMessage("发现新版本,建议立即更新使用。");
+        dialog.setBtnRightText("立即更新");
+        dialog.setBtnRightOnClickListener(new android.view.View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+                dialog.dismiss();
+            }
+        });
+        dialog.setOnDismissListener(new OnDismissListener(){
+
+            @Override
+            public void onDismiss(DialogInterface dialog){
+
+            }
+        });
+        dialog.show();
     }
 
-    private int     tag;
     private Handler handle = new Handler(){
-
                                @Override
                                public void handleMessage(Message msg){
-                                   if (tag<0) return;
-                                   switch (tag%4) {
-                                   case 0:
-                                       tvInfo.setText("    Loading    ");
-                                       break;
-                                   case 1:
-                                       tvInfo.setText("    Loading.   ");
-                                       break;
-                                   case 2:
-                                       tvInfo.setText("    Loading..  ");
-                                       break;
-                                   case 3:
-                                       tvInfo.setText("    Loading... ");
-                                       break;
-                                   }
-                                   tag++;
-                                   handle.sendEmptyMessageDelayed(0,500);
+                                   checkOutApp();
                                }
                            };
 
-    private void getURL(){
-        WebRequest wq = new WebRequest(staticURL.URL,staticURL.get_url){
-            @Override
-            protected void onSuccess(ResultObj resultObj){
-                P6000 p6000 = JSONUtils.fromJson(resultObj,P6000.class);
-                staticURL.DOMAINNAME = p6000.getURL();
-            }
-
-            @Override
-            protected void onFailure(ResultObj resultObj){
-                ToastUtil.show(resultObj);
-                getCourse();
-            }
-        };
-        wq.start();
-    }
-
     private void initSimnulateServer(){
-
         /**
          * 获取本地数据
          */
-        // 获取当前app版本号
-        int localVersionCode = 0;
-        try {
-            localVersionCode = getPackageManager().getPackageInfo(getPackageName(),PackageManager.GET_CONFIGURATIONS).versionCode;
-        } catch (NameNotFoundException e1) {
-            ToastUtil.show("无法获取app版本!");
-            getCourse();
-            return;
-        }
-        WebRequest wq = new WebRequest(staticURL.app_update){
-            @Override
-            protected void onSuccess(ResultObj resultObj){
-                P6001 p6001 = JSONUtils.fromJson(resultObj,P6001.class);
-                if ("2".equals(p6001.getNeedToUpdate())) {
-                    getCourse();
-                } else if ("3".equals(p6001.getNeedToUpdate())) {
-                    getCourse();
-                } else {
-                    getCourse();
-                }
-            }
-
-            @Override
-            protected void onFailure(ResultObj resultObj){
-                ToastUtil.show(resultObj);
-                getCourse();
-            }
-        };
 
         // 获取成绩数目
         int scoreCount = CourseDB.count();
@@ -157,7 +96,7 @@ public class AppStart extends BaseActivity{
         /**
          * 从服务端获取数据
          */
-        WebRequest wr = new WebRequest(staticURL.URL_PATH_INIT);
+        WebRequest wr = new WebRequest(staticURL.clientinit);
         wr.setParam(StaticValues.versionCode,String.valueOf(local_versionCode));
         wr.setParam("courseCount",String.valueOf(courseCount));
         wr.setParam("scoreUpdateTime",score_updateTime);
@@ -198,7 +137,7 @@ public class AppStart extends BaseActivity{
             }
 
             // 处理从server获取的课表信息
-            if (!json.getString("courseData").equals("null")) CourseService.resolveJsonString(json.getJSONArray("courseData"),getApplicationContext());
+            //if (!json.getString("courseData").equals("null")) CourseService.resolveJsonString(json.getJSONArray("courseData"),getApplicationContext());
 
             // 处理开学时间
             termStartTimeDealing(json.getString(ConstantStrUtil.TERM_START_DATE));
@@ -219,32 +158,7 @@ public class AppStart extends BaseActivity{
         }
     }
 
-    private void getCourse(){
-
-    }
-
-    protected void appUpdate(){
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        // alert.setTitle("软件升级");
-        alert.setMessage("发现新版本,建议立即更新使用.");
-        alert.setPositiveButton("暂时退出\n以后再说",new OnClickListener(){
-            public void onClick(DialogInterface dialog,int which){
-                finish();
-            }
-        });
-        alert.setNegativeButton("立即更新",new DialogInterface.OnClickListener(){
-            public void onClick(DialogInterface dialog,int which){
-                // 开启更新服务UpdateService
-                // 这里为了把update更好模块化，可以传一些updateService依赖的值
-                // 如布局ID，资源ID，动态获取的标题,这里以app_name为例
-                Intent i = new Intent(AppStart.this,AppUpdateService.class);
-                i.putExtra(ConstantStrUtil.STR_APPDOWNLOADURL,appDownLoadURL);
-                startService(i);
-                finish();
-            }
-        });
-        alert.create().show();
-    }
+    private void getCourse(){}
 
     private void scoreInfoDealing(JSONArray jsonArray) throws JSONException{
         int len = jsonArray.length();
@@ -252,7 +166,7 @@ public class AppStart extends BaseActivity{
         ScoreDB.delete();
         for (int i = 0; i<len; i++) {
             JSONObject jb = jsonArray.getJSONObject(i);
-            ScoreInfo model = new ScoreInfo();
+            P6006 model = new P6006();
             model.setXn(jb.getString(ScoreDB.COLUMN_XN));
             model.setXq(jb.getString(ScoreDB.COLUMN_XQ));
             model.setKcmc(jb.getString(ScoreDB.COLUMN_KCMC));
@@ -301,7 +215,7 @@ public class AppStart extends BaseActivity{
                                                public void handleMessage(Message msg){
                                                    switch (msg.what) {
                                                    case APP_UPDATE:
-                                                       appUpdate();
+
                                                        break;
                                                    case GET_DATA_FAIL:
                                                        Toast.makeText(AppStart.this,"获取数据失败!",Toast.LENGTH_LONG).show();

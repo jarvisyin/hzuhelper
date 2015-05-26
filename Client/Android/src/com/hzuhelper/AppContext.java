@@ -11,7 +11,7 @@ import android.net.NetworkInfo;
 import android.view.Display;
 import android.view.WindowManager;
 
-import com.hzuhelper.tools.StringUtils;
+import com.hzuhelper.utils.StringUtils;
 
 /**
  * 全局应用程序类：用于保存和调用全局应用配置及访问网络数据

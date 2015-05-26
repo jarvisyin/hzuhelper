@@ -21,10 +21,10 @@ import com.hzuhelper.config.StaticData;
 import com.hzuhelper.config.staticURL;
 import com.hzuhelper.model.receive.ARRAY_P6003;
 import com.hzuhelper.model.receive.P6003;
-import com.hzuhelper.tools.ToastUtil;
-import com.hzuhelper.web.JSONUtils;
-import com.hzuhelper.web.ResultObj;
-import com.hzuhelper.web.WebRequest;
+import com.hzuhelper.utils.ToastUtil;
+import com.hzuhelper.utils.web.JSONUtils;
+import com.hzuhelper.utils.web.ResultObj;
+import com.hzuhelper.utils.web.WebRequest;
 
 public class ResList extends BaseActivity {
     private ArrayList<ARRAY_P6003> list;

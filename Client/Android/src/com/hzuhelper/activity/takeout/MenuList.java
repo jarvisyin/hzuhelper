@@ -9,8 +9,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -26,22 +24,22 @@ import com.hzuhelper.config.StaticData;
 import com.hzuhelper.config.StaticValues;
 import com.hzuhelper.config.staticURL;
 import com.hzuhelper.model.receive.ARRAY_P6002;
-import com.hzuhelper.model.receive.P6002;
 import com.hzuhelper.model.receive.ARRAY_P6003;
-import com.hzuhelper.tools.ToastUtil;
-import com.hzuhelper.web.JSONUtils;
-import com.hzuhelper.web.ResultObj;
-import com.hzuhelper.web.WebRequest;
+import com.hzuhelper.model.receive.P6002;
+import com.hzuhelper.utils.ToastUtil;
+import com.hzuhelper.utils.web.JSONUtils;
+import com.hzuhelper.utils.web.ResultObj;
+import com.hzuhelper.utils.web.WebRequest;
 
-public class MenuList extends BaseActivity {
+public class MenuList extends BaseActivity{
 
-    private ProgressDialog        progressDialog;
-    private ARRAY_P6003 TakeoutRestaurantInfo;
-    private ListView              listView;
-    private Builder               phoneCallADB;
-    private Builder               commentADB;
-    private String[]              phones;
-    protected Button              btn;
+    private ProgressDialog progressDialog;
+    private ARRAY_P6003    TakeoutRestaurantInfo;
+    private ListView       listView;
+    private Builder        phoneCallADB;
+    private Builder        commentADB;
+    private String[]       phones;
+    protected Button       btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -60,13 +58,13 @@ public class MenuList extends BaseActivity {
         Button btnCai = (Button)findViewById(R.id.cai);
         if (TakeoutRestaurantInfo.getCai()>0) btnCai.setText(String.valueOf(TakeoutRestaurantInfo.getCai()));
         else btnCai.setText("踩");
-        btnCai.setOnClickListener(new OnClickListener() {
+        btnCai.setOnClickListener(new OnClickListener(){
             public void onClick(View v){
                 btn = (Button)v;
                 btn.setEnabled(false);
                 TakeoutRestaurantInfo.setCai(TakeoutRestaurantInfo.getCai()+1);
                 btn.setText(String.valueOf(TakeoutRestaurantInfo.getCai()));
-                WebRequest wq = new WebRequest(staticURL.takeout_restaurant_comment_commit) {
+                WebRequest wq = new WebRequest(staticURL.takeout_restaurant_comment_commit){
                     @Override
                     protected void onFailure(ResultObj resultObj){
                         ToastUtil.show(resultObj.getErrorMsg());
@@ -85,13 +83,13 @@ public class MenuList extends BaseActivity {
         Button btnDing = (Button)findViewById(R.id.ding);
         if (TakeoutRestaurantInfo.getDing()>0) btnDing.setText(String.valueOf(TakeoutRestaurantInfo.getDing()));
         else btnDing.setText("赞");
-        btnDing.setOnClickListener(new OnClickListener() {
+        btnDing.setOnClickListener(new OnClickListener(){
             public void onClick(View v){
                 btn = (Button)v;
                 btn.setEnabled(false);
                 TakeoutRestaurantInfo.setDing(TakeoutRestaurantInfo.getDing()+1);
                 btn.setText(String.valueOf(TakeoutRestaurantInfo.getDing()));
-                WebRequest wq = new WebRequest(staticURL.takeout_restaurant_comment_commit) {
+                WebRequest wq = new WebRequest(staticURL.takeout_restaurant_comment_commit){
                     @Override
                     protected void onFailure(ResultObj resultObj){
                         ToastUtil.show(resultObj.getErrorMsg());
@@ -109,7 +107,7 @@ public class MenuList extends BaseActivity {
     private void commentInit(){
         commentADB = new AlertDialog.Builder(this);
         String[] items = {"我要评论","阅读评论"};
-        commentADB.setItems(items,new DialogInterface.OnClickListener() {
+        commentADB.setItems(items,new DialogInterface.OnClickListener(){
             public void onClick(DialogInterface dialog,int item){
                 try {
                     if (item==0) {
@@ -135,7 +133,7 @@ public class MenuList extends BaseActivity {
         } else {
             comment.setText(String.valueOf(TakeoutRestaurantInfo.getCommentNum()));
         }
-        comment.setOnClickListener(new OnClickListener() {
+        comment.setOnClickListener(new OnClickListener(){
             public void onClick(View v){
                 commentADB.show();
             }
@@ -146,7 +144,7 @@ public class MenuList extends BaseActivity {
         phoneCallADB = new AlertDialog.Builder(this);
         phoneCallADB.setTitle("拨打:");
         phones = TakeoutRestaurantInfo.getPhone().split(",");
-        phoneCallADB.setItems(phones,new DialogInterface.OnClickListener() {
+        phoneCallADB.setItems(phones,new DialogInterface.OnClickListener(){
             public void onClick(DialogInterface dialog,int item){
                 try {
                     Intent phoneIntent = new Intent("android.intent.action.CALL",Uri.parse("tel:"+phones[item]));
@@ -159,7 +157,7 @@ public class MenuList extends BaseActivity {
 
         Button phone = (Button)findViewById(R.id.phone);
         phone.setText(TakeoutRestaurantInfo.getPhone());
-        phone.setOnClickListener(new OnClickListener() {
+        phone.setOnClickListener(new OnClickListener(){
             public void onClick(View v){
                 phoneCallADB.show();
             }
@@ -174,7 +172,7 @@ public class MenuList extends BaseActivity {
 
     private void listViewInit(){
         listView = (ListView)findViewById(R.id.listView);
-        WebRequest wq = new WebRequest(staticURL.menu_itemgetlist) {
+        WebRequest wq = new WebRequest(staticURL.menu_itemgetlist){
             @Override
             protected void onFailure(ResultObj resultObj){
                 ToastUtil.show(resultObj.getErrorMsg());
@@ -193,26 +191,5 @@ public class MenuList extends BaseActivity {
         wq.setParam(StaticValues.restaurantId,String.valueOf(TakeoutRestaurantInfo.getId()));
         wq.start();
     }
-
-    private String     errorMsg;
-    private final byte DING_FAIL = 3;
-    private final byte CAI_FAIL  = 4;
-    private Handler    handler   = new Handler() {
-                                     public void handleMessage(Message msg){
-                                         switch (msg.what) {
-
-                                         case DING_FAIL:
-                                             Toast.makeText(MenuList.this,errorMsg,Toast.LENGTH_SHORT).show();
-                                             TakeoutRestaurantInfo.setDing(TakeoutRestaurantInfo.getDing()-1);
-                                             btn.setText(String.valueOf(TakeoutRestaurantInfo.getDing()));
-                                             break;
-                                         case CAI_FAIL:
-                                             Toast.makeText(MenuList.this,errorMsg,Toast.LENGTH_SHORT).show();
-                                             TakeoutRestaurantInfo.setCai(TakeoutRestaurantInfo.getCai()-1);
-                                             btn.setText(String.valueOf(TakeoutRestaurantInfo.getCai()));
-                                             break;
-                                         }
-                                     };
-                                 };
 
 }

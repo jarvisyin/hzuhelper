@@ -26,6 +26,10 @@ public class StaticValues{
     public final static String cai             = "cai";
     public final static String tag             = "tag";
     public final static String id              = "id";
-
+    public final static String android         = "android";
     public final static String SPF_FILE_COMMON = "SPF_FILE_COMMON";
+    public final static String needToUpdate    = "needToUpdate";
+    public final static String True            = "True";
+    public final static String False           = "False";
+    public final static String request_url     = "request_url";
 }

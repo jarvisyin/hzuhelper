@@ -9,17 +9,12 @@ import android.os.Bundle;
 public class ProgressDialog extends Dialog{
 
     public ProgressDialog(Context context){
-        super(context, R.style.ProgressDialog);
-        init();
-    }
-
-    private void init(){
-
+        super(context, R.style.Dialog);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
-        setContentView(R.layout.progress_view);
+        setContentView(R.layout.dialog_progress);
     }
 
 }

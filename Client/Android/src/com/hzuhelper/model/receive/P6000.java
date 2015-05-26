@@ -1,6 +1,13 @@
 package com.hzuhelper.model.receive;
 
-public class P6000{
+import com.hzuhelper.model.RECEIVE;
+
+/**
+ * 请求便捷URL
+ * @author jarvisyin
+ *
+ */
+public class P6000 extends RECEIVE{
     private String URL;
 
     public String getURL(){

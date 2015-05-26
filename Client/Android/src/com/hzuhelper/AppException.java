@@ -17,7 +17,7 @@ import android.os.Environment;
 import android.os.Looper;
 import android.widget.Toast;
 
-import com.hzuhelper.tools.DateUtil;
+import com.hzuhelper.utils.DateUtil;
 
 /**
  * 应用程序异常类：用于捕获异常和提示错误信息

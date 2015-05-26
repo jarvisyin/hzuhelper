@@ -3,6 +3,7 @@ package com.hzuhelper.model.receive;
 import java.util.Date;
 
 /**
+ * 树洞评论
  * ChatComment1Info
  * @author jarvisyin
  *

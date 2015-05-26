@@ -9,10 +9,11 @@
     <color name="colorF5F5F5">#F5F5F5</color>
     <color name="colorFF9A00">#FF9A00</color>
     <color name="color707070">#707070</color>
-    
     <color name="green_light">#99cc00</color>
     <color name="green_dark">#669900</color>
     <color name="orange_light">#ffbb33</color>
     <color name="orange_dark">#ff8800</color>
+    <color name="blue_light">#33b5e5</color>
+    <color name="blue_dark">#0099cc</color>
 
 </resources>

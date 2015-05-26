@@ -13,7 +13,7 @@ import com.hzuhelper.R;
 import com.hzuhelper.activity.BaseActivity;
 import com.hzuhelper.config.StaticData;
 import com.hzuhelper.database.CourseDB;
-import com.hzuhelper.model.CourseInfo;
+import com.hzuhelper.model.receive.P6004;
 import com.hzuhelper.wedget.CourseDatetimePicker;
 import com.hzuhelper.wedget.CourseDatetimePicker.Init;
 
@@ -26,7 +26,7 @@ public class Edit extends BaseActivity implements OnClickListener{
 	private EditText teacher;
 	private TextView time1;
 	private TextView time2;
-	private CourseInfo model;
+	private P6004 model;
 	private CourseDatetimePicker time2Picker;
 	private CourseDatetimePicker time1Picker;
 

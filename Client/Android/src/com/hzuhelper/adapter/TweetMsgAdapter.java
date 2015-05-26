@@ -15,12 +15,12 @@ import android.widget.TextView;
 import com.hzuhelper.R;
 import com.hzuhelper.activity.chat.CommentCommit;
 import com.hzuhelper.activity.chat.TweetShow;
-import com.hzuhelper.model.ChatComment2Info;
-import com.hzuhelper.tools.ConstantStrUtil;
-import com.hzuhelper.tools.DateUtil;
+import com.hzuhelper.model.receive.P6005;
+import com.hzuhelper.utils.ConstantStrUtil;
+import com.hzuhelper.utils.DateUtil;
 
 public class TweetMsgAdapter extends BaseAdapter {
-	private ArrayList<ChatComment2Info> list = null;
+	private ArrayList<P6005> list = null;
 	private LayoutInflater listContainer;
 	private Context context;
 
@@ -33,7 +33,7 @@ public class TweetMsgAdapter extends BaseAdapter {
 		public TextView tv_yourcontent;
 	}
 
-	public TweetMsgAdapter(ArrayList<ChatComment2Info> list,
+	public TweetMsgAdapter(ArrayList<P6005> list,
 			Context context) {
 		this.context = context;
 		this.list = list;
@@ -74,16 +74,16 @@ public class TweetMsgAdapter extends BaseAdapter {
 		} else {
 			listItemView = (ListItemView) view.getTag();
 		}
-		ChatComment2Info model = list.get(index);
+		P6005 model = list.get(index);
 
-		if (model.getResponse_comment_id() < 1)
+		if (model.getResponseCommentId() < 1)
 			listItemView.tv_yourcontent.setText("回复你的树洞："
 					+ model.getYourContent() + " ......");
 		else
 			listItemView.tv_yourcontent.setText("回复你的评论："
 					+ model.getYourContent() + " ......");
 		listItemView.tv_date.setText(DateUtil.friendly_time(model
-				.getPublish_date()));
+				.getPublishDate()));
 		listItemView.tv_content.setText(model.getContent());
 		listItemView.tv_author.setText("同学甲乙丙丁");
 		listItemView.btn_comment.setTag(model);
@@ -95,9 +95,9 @@ public class TweetMsgAdapter extends BaseAdapter {
 
 	OnClickListener bcOnclickListerer = new OnClickListener() {
 		public void onClick(View v) {
-			ChatComment2Info model = (ChatComment2Info) v.getTag();
+			P6005 model = (P6005) v.getTag();
 			Intent intent = new Intent(context, CommentCommit.class);
-			intent.putExtra("tweetId", model.getTweet_id());
+			intent.putExtra("tweetId", model.getTweetId());
 			intent.putExtra(ConstantStrUtil.COMMENT_ID, model.getId());
 			context.startActivity(intent);
 		}
@@ -105,9 +105,9 @@ public class TweetMsgAdapter extends BaseAdapter {
 
 	OnClickListener lioOnclickListerer = new OnClickListener() {
 		public void onClick(View v) {
-			ChatComment2Info model = (ChatComment2Info) v.getTag();
+			P6005 model = (P6005) v.getTag();
 			Intent intent = new Intent(context, TweetShow.class);
-			intent.putExtra("tweetId", model.getTweet_id());
+			intent.putExtra("tweetId", model.getTweetId());
 			context.startActivity(intent);
 		}
 	};

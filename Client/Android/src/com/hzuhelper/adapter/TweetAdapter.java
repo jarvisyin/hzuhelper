@@ -18,8 +18,8 @@ import com.hzuhelper.R;
 import com.hzuhelper.activity.chat.CommentCommit;
 import com.hzuhelper.activity.chat.TweetShow;
 import com.hzuhelper.model.receive.ARRAY_CT0001;
-import com.hzuhelper.tools.DateUtil;
-import com.hzuhelper.tools.StringUtils;
+import com.hzuhelper.utils.DateUtil;
+import com.hzuhelper.utils.StringUtils;
 
 public class TweetAdapter extends BaseAdapter {
 	private ArrayList<ARRAY_CT0001> list = null;

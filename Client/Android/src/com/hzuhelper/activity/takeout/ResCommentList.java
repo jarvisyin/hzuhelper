@@ -15,11 +15,10 @@ import com.hzuhelper.config.StaticValues;
 import com.hzuhelper.config.staticURL;
 import com.hzuhelper.model.receive.ARRAY_CT0001;
 import com.hzuhelper.model.receive.CT0001;
-import com.hzuhelper.tools.ConstantStrUtil;
-import com.hzuhelper.tools.ToastUtil;
-import com.hzuhelper.web.JSONUtils;
-import com.hzuhelper.web.ResultObj;
-import com.hzuhelper.web.WebRequest;
+import com.hzuhelper.utils.ToastUtil;
+import com.hzuhelper.utils.web.JSONUtils;
+import com.hzuhelper.utils.web.ResultObj;
+import com.hzuhelper.utils.web.WebRequest;
 import com.hzuhelper.wedget.RefreshAbleListView;
 import com.hzuhelper.wedget.RefreshAbleListView.OnGetMoreDateListener;
 import com.hzuhelper.wedget.RefreshAbleListView.OnRefreshListener;
@@ -65,7 +64,7 @@ public class ResCommentList extends BaseActivity implements OnClickListener{
      * 刷新
      */
     private void refresh(){
-        WebRequest wq = new WebRequest(staticURL.URL_PATH_CHAT_TWEET_GETLIST){
+        WebRequest wq = new WebRequest(staticURL.chat_tweet_getlist){
             @Override
             protected void onFailure(ResultObj resultObj){
                 ToastUtil.show(resultObj);
@@ -98,7 +97,7 @@ public class ResCommentList extends BaseActivity implements OnClickListener{
         int listSize = 0;
         if ((listSize = list1.size())<1) return;
         ARRAY_CT0001 model = list1.get(listSize-1);
-        WebRequest wq = new WebRequest(staticURL.URL_PATH_CHAT_TWEET_GETLIST){
+        WebRequest wq = new WebRequest(staticURL.chat_tweet_getlist){
             @Override
             protected void onFailure(ResultObj resultObj){
                 ToastUtil.show(resultObj);

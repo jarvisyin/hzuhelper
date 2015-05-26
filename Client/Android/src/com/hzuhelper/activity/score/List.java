@@ -19,12 +19,11 @@ import com.hzuhelper.activity.chat.TweetList;
 import com.hzuhelper.adapter.ScoreAdapter;
 import com.hzuhelper.config.StaticValues;
 import com.hzuhelper.database.ScoreDB;
-import com.hzuhelper.model.ScoreInfo;
-import com.hzuhelper.tools.ConstantStrUtil;
+import com.hzuhelper.model.receive.P6006;
 
 public class List extends BaseActivity{
 
-    private ArrayList<ScoreInfo> sList;
+    private ArrayList<P6006> sList;
     private ListView             lv_listScore;
     private AlertDialog.Builder  builder;
     private SharedPreferences    sp;
@@ -49,7 +48,7 @@ public class List extends BaseActivity{
         }
 
         lv_listScore = (ListView)findViewById(R.id.listView1);
-        sList = (ArrayList<ScoreInfo>)ScoreDB.getList();
+        sList = (ArrayList<P6006>)ScoreDB.getList();
         adp = new ScoreAdapter(this,sList);
         lv_listScore.setAdapter(adp);
         initTvMsg();

@@ -18,9 +18,9 @@ import com.hzuhelper.R;
 import com.hzuhelper.activity.chat.CommentCommit;
 import com.hzuhelper.model.receive.ARRAY_CT0001;
 import com.hzuhelper.model.receive.ARRAY_CT0002;
-import com.hzuhelper.tools.ConstantStrUtil;
-import com.hzuhelper.tools.StringUtils;
-import com.hzuhelper.tools.DateUtil;
+import com.hzuhelper.utils.ConstantStrUtil;
+import com.hzuhelper.utils.DateUtil;
+import com.hzuhelper.utils.StringUtils;
 
 public class CommentAdapter extends BaseAdapter {
 

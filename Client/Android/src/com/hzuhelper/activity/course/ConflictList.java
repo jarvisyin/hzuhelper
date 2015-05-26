@@ -13,18 +13,18 @@ import com.hzuhelper.R;
 import com.hzuhelper.activity.BaseActivity;
 import com.hzuhelper.adapter.CourseAdapter;
 import com.hzuhelper.database.CourseDB;
-import com.hzuhelper.model.CourseInfo;
+import com.hzuhelper.model.receive.P6004;
 
 public class ConflictList extends BaseActivity implements OnClickListener{
 	private ListView lv_listCourse;
-	private List<CourseInfo> cList;
+	private List<P6004> cList;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_course_list);
 		findViewById(R.id.btn_left).setOnClickListener(this);
 		int courseid = Integer.valueOf(getIntent().getIntExtra("courseid", -1));
-		CourseInfo model = CourseDB.getModel(courseid);
+		P6004 model = CourseDB.getModel(courseid);
 		cList = CourseDB.getList("daytime=" + model.getDaytime()
 				+ " and courseTime1>=" + model.getCoursetime1()
 				+ " and courseTime1<="

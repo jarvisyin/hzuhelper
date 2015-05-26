@@ -12,10 +12,9 @@ import com.hzuhelper.activity.BaseActivity;
 import com.hzuhelper.activity.chat.TweetList;
 import com.hzuhelper.config.StaticValues;
 import com.hzuhelper.config.staticURL;
-import com.hzuhelper.tools.ConstantStrUtil;
-import com.hzuhelper.tools.ToastUtil;
-import com.hzuhelper.web.ResultObj;
-import com.hzuhelper.web.WebRequest;
+import com.hzuhelper.utils.ToastUtil;
+import com.hzuhelper.utils.web.ResultObj;
+import com.hzuhelper.utils.web.WebRequest;
 
 public class Login extends BaseActivity{
 

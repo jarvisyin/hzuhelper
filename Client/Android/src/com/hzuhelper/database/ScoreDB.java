@@ -6,7 +6,7 @@ import java.util.List;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.hzuhelper.model.ScoreInfo;
+import com.hzuhelper.model.receive.P6006;
 
 public class ScoreDB {
 
@@ -28,13 +28,13 @@ public class ScoreDB {
 
 	private ScoreDB() {}	
 
-	public static List<ScoreInfo> getList() {
+	public static List<P6006> getList() {
 		SQLiteDatabase db = DAOHelper.getInstance().getReadableDatabase();
 		Cursor cursor = db.rawQuery("select * from " + TABLE_NAME
 				+ "  order by xn desc,xq desc", null);
-		List<ScoreInfo> sList = new ArrayList<ScoreInfo>();
+		List<P6006> sList = new ArrayList<P6006>();
 		while (cursor.moveToNext()) {
-			ScoreInfo model = new ScoreInfo();
+			P6006 model = new P6006();
 			model.setId(cursor.getInt(cursor.getColumnIndex(COLUMN_ID)));
 			model.setXn(cursor.getString(cursor.getColumnIndex(COLUMN_XN)));
 			model.setXq(cursor.getString(cursor.getColumnIndex(COLUMN_XQ)));
@@ -61,7 +61,7 @@ public class ScoreDB {
 		db.close();
 	}
 
-	public static void save(ScoreInfo model) {
+	public static void save(P6006 model) {
 		SQLiteDatabase db = DAOHelper.getInstance().getReadableDatabase();
 		db.execSQL(
 				"insert into " + TABLE_NAME + " (" + COLUMN_XN + ","

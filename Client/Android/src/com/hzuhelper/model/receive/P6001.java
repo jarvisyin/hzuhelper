@@ -1,32 +1,57 @@
 package com.hzuhelper.model.receive;
 
-public class P6001{
-    /**
-     * 1---不需要升级
-     * 2---需要升级，但非强制的
-     * 3---需要强制升级
-     */
-    private String needToUpdate;
-    private String URL;
+import com.hzuhelper.model.RECEIVE;
 
-    /**
-     * 1---不需要升级                                    <br/>
-     * 2---需要升级，但非强制的                 <br/>
-     * 3---需要强制升级                                <br/>
-     */
-    public String getNeedToUpdate(){
-        return needToUpdate;
+/**
+ * 最新应用信息
+ * @author jarvisyin
+ *
+ */
+public class P6001 extends RECEIVE{
+    private String appContent;
+    private String osType;
+    private String url;
+    private String versionName;
+    private int    versionCode;
+
+    public String getAppContent(){
+        return appContent;
     }
 
-    public void setNeedToUpdate(String needToUpdate){
-        this.needToUpdate = needToUpdate;
+    public void setAppContent(String appContent){
+        this.appContent = appContent;
     }
 
-    public String getURL(){
-        return URL;
+    public String getOsType(){
+        return osType;
     }
 
-    public void setURL(String uRL){
-        URL = uRL;
+    public void setOsType(String osType){
+        this.osType = osType;
     }
+
+    public String getUrl(){
+        return url;
+    }
+
+    public void setUrl(String url){
+        this.url = url;
+    }
+
+    public String getVersionName(){
+        return versionName;
+    }
+
+    public void setVersionName(String versionName){
+        this.versionName = versionName;
+    }
+
+    public int getVersionCode(){
+        return versionCode;
+    }
+
+    public void setVersionCode(int versionCode){
+        this.versionCode = versionCode;
+    }
+
 }

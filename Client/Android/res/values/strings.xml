@@ -38,6 +38,8 @@
 
     <!--  -->
 
+    <string name="queding">确定</string>
+    <string name="quxiao">取消</string>
     <string name="shoujihaoma">手机号码</string>
     <string name="zhongguo">中国</string>
     <string name="mima">密码</string>

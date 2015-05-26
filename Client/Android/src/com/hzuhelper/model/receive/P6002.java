@@ -2,7 +2,10 @@ package com.hzuhelper.model.receive;
 
 import java.util.List;
 
+import com.hzuhelper.model.RECEIVE;
+
 /** 
+ * 菜单项
  * MenuItem
  * @author jarvisyin
  *

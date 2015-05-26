@@ -14,7 +14,7 @@ import com.hzuhelper.R;
 import com.hzuhelper.activity.BaseActivity;
 import com.hzuhelper.config.StaticData;
 import com.hzuhelper.database.CourseDB;
-import com.hzuhelper.model.CourseInfo;
+import com.hzuhelper.model.receive.P6004;
 
 public class Single extends BaseActivity implements OnClickListener{
 	private TextView name;
@@ -22,7 +22,7 @@ public class Single extends BaseActivity implements OnClickListener{
 	private TextView teacher;
 	private TextView time;
 	private TextView termtime;
-	private CourseInfo model;
+	private P6004 model;
 	private Builder adb;
 	private ProgressDialog mydialog;
 

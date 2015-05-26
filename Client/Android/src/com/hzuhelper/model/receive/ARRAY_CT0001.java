@@ -1,6 +1,11 @@
 package com.hzuhelper.model.receive;
 
-public class ARRAY_CT0001 {
+/**
+ * 树洞内容
+ * @author jarvisyin
+ *
+ */
+public class ARRAY_CT0001{
     private int    id;
     private String content;
     private int    ding;

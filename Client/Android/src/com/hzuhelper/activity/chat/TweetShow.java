@@ -24,11 +24,11 @@ import com.hzuhelper.config.staticURL;
 import com.hzuhelper.model.receive.ARRAY_CT0001;
 import com.hzuhelper.model.receive.ARRAY_CT0002;
 import com.hzuhelper.model.receive.CT0002;
-import com.hzuhelper.tools.StringUtils;
-import com.hzuhelper.tools.ToastUtil;
-import com.hzuhelper.web.JSONUtils;
-import com.hzuhelper.web.ResultObj;
-import com.hzuhelper.web.WebRequest;
+import com.hzuhelper.utils.StringUtils;
+import com.hzuhelper.utils.ToastUtil;
+import com.hzuhelper.utils.web.JSONUtils;
+import com.hzuhelper.utils.web.ResultObj;
+import com.hzuhelper.utils.web.WebRequest;
 
 public class TweetShow extends BaseActivity implements OnScrollListener,OnClickListener {
     private ListView                listView;

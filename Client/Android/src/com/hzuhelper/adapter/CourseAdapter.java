@@ -22,15 +22,15 @@ import com.hzuhelper.activity.course.Single;
 import com.hzuhelper.activity.course.Table;
 import com.hzuhelper.config.StaticData;
 import com.hzuhelper.database.CourseDB;
-import com.hzuhelper.model.CourseInfo;
+import com.hzuhelper.model.receive.P6004;
 
 public class CourseAdapter extends BaseAdapter implements OnClickListener,android.content.DialogInterface.OnClickListener {
 
-	private List<CourseInfo> cList;
+	private List<P6004> cList;
 	private Context context;
 	private int courseid;
 
-	public CourseAdapter(Context context, List<CourseInfo> cList) {
+	public CourseAdapter(Context context, List<P6004> cList) {
 		this.cList = cList;
 		this.context = context;
 	}
@@ -40,7 +40,7 @@ public class CourseAdapter extends BaseAdapter implements OnClickListener,androi
 	}
 
 	@Override
-	public CourseInfo getItem(int position) {
+	public P6004 getItem(int position) {
 		return cList.get(position);
 	}
 
@@ -64,7 +64,7 @@ public class CourseAdapter extends BaseAdapter implements OnClickListener,androi
 		} else
 			viewHolder = (ViewHolder) view.getTag();
 
-		CourseInfo cm = cList.get(position);
+		P6004 cm = cList.get(position);
 		viewHolder.tv_name.setText(cm.getName());
 		viewHolder.tv_teacher.setText(cm.getTeacher());
 		viewHolder.tv_time.setText(cm.getStarttime() + "-" + cm.getEndtime()
@@ -108,7 +108,7 @@ public class CourseAdapter extends BaseAdapter implements OnClickListener,androi
 
 	@Override
 	public void onClick(DialogInterface dialog, int which) {
-		for (CourseInfo cm : cList) {
+		for (P6004 cm : cList) {
 			if (cm.getId() != courseid)
 				CourseDB.delete(cm.getId());
 		}

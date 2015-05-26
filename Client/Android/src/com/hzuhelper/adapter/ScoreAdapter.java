@@ -11,13 +11,13 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.hzuhelper.R;
-import com.hzuhelper.model.ScoreInfo;
+import com.hzuhelper.model.receive.P6006;
 
 public class ScoreAdapter extends BaseAdapter {
-	private	ArrayList<ScoreInfo> sList;
+	private	ArrayList<P6006> sList;
 	private Context context;
 	public boolean isFail;
-	public ScoreAdapter(Context context,ArrayList<ScoreInfo> sList){
+	public ScoreAdapter(Context context,ArrayList<P6006> sList){
 		this.sList=sList;
 		this.context=context;
 	}
@@ -59,7 +59,7 @@ public class ScoreAdapter extends BaseAdapter {
 		} else {
 			listItemView = (ListItemView) convertView.getTag();
 		}
-		ScoreInfo model = sList.get(position);
+		P6006 model = sList.get(position);
 
 		listItemView.tv_kcmc.setText(model.getKcmc());
 		listItemView.tv_xn.setText(model.getXn() + "学年 ");

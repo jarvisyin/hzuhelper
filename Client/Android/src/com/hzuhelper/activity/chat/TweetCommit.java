@@ -16,9 +16,9 @@ import com.hzuhelper.config.StaticData;
 import com.hzuhelper.config.StaticValues;
 import com.hzuhelper.config.staticURL;
 import com.hzuhelper.model.receive.ARRAY_P6003;
-import com.hzuhelper.tools.ToastUtil;
-import com.hzuhelper.web.ResultObj;
-import com.hzuhelper.web.WebRequest;
+import com.hzuhelper.utils.ToastUtil;
+import com.hzuhelper.utils.web.ResultObj;
+import com.hzuhelper.utils.web.WebRequest;
 
 public class TweetCommit extends BaseActivity implements OnClickListener,TextWatcher {
 
@@ -61,7 +61,7 @@ public class TweetCommit extends BaseActivity implements OnClickListener,TextWat
             return;
         }
         myDialog = ProgressDialog.show(TweetCommit.this,null,"发布中...");
-        WebRequest wr = new WebRequest(staticURL.URL_PATH_CHAT_TWEET_COMMIT) {
+        WebRequest wr = new WebRequest(staticURL.chat_tweet_commit) {
             @Override
             protected void onFinished(ResultObj resultObj){
                 myDialog.dismiss();

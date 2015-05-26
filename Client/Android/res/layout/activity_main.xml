@@ -15,26 +15,18 @@
         android:paddingBottom="60dip" >
 
         <ImageView
-            android:contentDescription="@string/app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name"
             android:src="@drawable/logo2" />
 
         <ImageView
-            android:contentDescription="@string/app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:layout_marginTop="10dp"
+            android:contentDescription="@string/app_name"
             android:src="@drawable/img_loading_bg2" />
-
-        <TextView
-            android:id="@+id/tv_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#FFFF66"
-            android:textSize="@dimen/text_size_17"
-            android:textStyle="bold|italic" />
     </LinearLayout>
 
     <TextView

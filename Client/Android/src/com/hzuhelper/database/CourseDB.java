@@ -7,8 +7,8 @@ import java.util.List;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.hzuhelper.model.CourseInfo;
-import com.hzuhelper.tools.Common;
+import com.hzuhelper.model.receive.P6004;
+import com.hzuhelper.utils.Common;
 
 public class CourseDB {
 	public static final String TABLE_NAME = "Course";
@@ -27,7 +27,7 @@ public class CourseDB {
 
 	private CourseDB() {}
 
-	public static void save(CourseInfo course) {
+	public static void save(P6004 course) {
 		SQLiteDatabase db = DAOHelper.getInstance().getWritableDatabase();
 		db.execSQL(
 				"insert into " + TABLE_NAME + " (" + COLUMN_WEEKTIME + ","
@@ -59,7 +59,7 @@ public class CourseDB {
 		db.close();
 	}
 
-	public static void update(CourseInfo course) {
+	public static void update(P6004 course) {
 		SQLiteDatabase db = DAOHelper.getInstance().getWritableDatabase();
 		db.execSQL(
 				"update " + TABLE_NAME + " set " + COLUMN_WEEKTIME + "=?,"
@@ -89,11 +89,11 @@ public class CourseDB {
 		return count;
 	}
 
-	public static LinkedList<CourseInfo> getList(Date date) {
+	public static LinkedList<P6004> getList(Date date) {
 		byte dayOfWeek = Common.getDayOfWeek(date);
 		int WeekOfTerm = Common.getWeekOfTerm(date);
 		int mono = WeekOfTerm % 2 == 0 ? 2 : 1;
-		LinkedList<CourseInfo> clist = new LinkedList<CourseInfo>();
+		LinkedList<P6004> clist = new LinkedList<P6004>();
 		SQLiteDatabase db = DAOHelper.getInstance().getReadableDatabase();
 		Cursor cursor = db
 				.rawQuery(
@@ -105,38 +105,38 @@ public class CourseDB {
 								String.valueOf(dayOfWeek),
 								String.valueOf(WeekOfTerm),
 								String.valueOf(WeekOfTerm) });
-		LinkedList<CourseInfo> list = modelToLinkedList(cursor, clist);
+		LinkedList<P6004> list = modelToLinkedList(cursor, clist);
 		db.close();
 		return list;
 	}
 
-	public static LinkedList<CourseInfo> getLinkedList() {
-		LinkedList<CourseInfo> clist = new LinkedList<CourseInfo>();
+	public static LinkedList<P6004> getLinkedList() {
+		LinkedList<P6004> clist = new LinkedList<P6004>();
 		SQLiteDatabase db = DAOHelper.getInstance().getReadableDatabase();
 		Cursor cursor = db.rawQuery("select * from " + TABLE_NAME
 				+ " order by " + COLUMN_DAYTIME + "," + COLUMN_COURSETIME1,
 				null);
-		LinkedList<CourseInfo> list = modelToLinkedList(cursor, clist);
+		LinkedList<P6004> list = modelToLinkedList(cursor, clist);
 		db.close();
 		return list;
 	}
 
-	public static List<CourseInfo> getList(String cmd) {
-		LinkedList<CourseInfo> clist = new LinkedList<CourseInfo>();
+	public static List<P6004> getList(String cmd) {
+		LinkedList<P6004> clist = new LinkedList<P6004>();
 		SQLiteDatabase db = DAOHelper.getInstance().getReadableDatabase();
 		Cursor cursor = db.rawQuery("select * from " + TABLE_NAME + " where "
 				+ cmd + " order by " + COLUMN_DAYTIME + ","
 				+ COLUMN_COURSETIME1, null);
-		LinkedList<CourseInfo> list = modelToLinkedList(cursor, clist);
+		LinkedList<P6004> list = modelToLinkedList(cursor, clist);
 		db.close();
 		return list;
 	}
 
-	public static CourseInfo getModel(int id) {
+	public static P6004 getModel(int id) {
 		SQLiteDatabase db = DAOHelper.getInstance().getReadableDatabase();
 		Cursor cursor = db.rawQuery("select * from " + TABLE_NAME + " where "
 				+ COLUMN_ID + "=?", new String[] { String.valueOf(id) });
-		CourseInfo model;
+		P6004 model;
 		if (cursor.moveToFirst()) {
 			model = cursorToModel(cursor);
 		} else {
@@ -146,16 +146,16 @@ public class CourseDB {
 		return model;
 	}
 
-	private static LinkedList<CourseInfo> modelToLinkedList(Cursor cursor,
-			LinkedList<CourseInfo> clist) {
+	private static LinkedList<P6004> modelToLinkedList(Cursor cursor,
+			LinkedList<P6004> clist) {
 		while (cursor.moveToNext()) {
 			clist.add(cursorToModel(cursor));
 		}
 		return clist;
 	}
 
-	private static CourseInfo cursorToModel(Cursor cursor) {
-		CourseInfo model = new CourseInfo();
+	private static P6004 cursorToModel(Cursor cursor) {
+		P6004 model = new P6004();
 		model.setId(cursor.getInt(cursor.getColumnIndex(COLUMN_ID)));
 		model.setServerid(cursor.getInt(cursor.getColumnIndex(COLUMN_SERVERID)));
 		model.setWeektime(cursor.getInt(cursor.getColumnIndex(COLUMN_WEEKTIME)));

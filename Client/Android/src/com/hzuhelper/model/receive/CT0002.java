@@ -2,6 +2,8 @@ package com.hzuhelper.model.receive;
 
 import java.util.List;
 
+import com.hzuhelper.model.RECEIVE;
+
 public class CT0002 extends RECEIVE {
 
     private List<ARRAY_CT0002> ARRAY_CT0002;

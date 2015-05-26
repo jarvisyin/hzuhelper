@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import com.hzuhelper.tools.ConstantStrUtil;
+import com.hzuhelper.utils.ConstantStrUtil;
 import com.hzuhelper.AppStart;
 import com.hzuhelper.R;
 
