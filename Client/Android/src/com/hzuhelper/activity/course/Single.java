@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.hzuhelper.R;
 import com.hzuhelper.activity.BaseActivity;
 import com.hzuhelper.config.StaticData;
-import com.hzuhelper.database.CourseDB;
+import com.hzuhelper.database.table.CourseDB;
 import com.hzuhelper.model.receive.P6004;
 
 public class Single extends BaseActivity implements OnClickListener{

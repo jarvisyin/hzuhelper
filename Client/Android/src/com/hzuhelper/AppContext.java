@@ -5,11 +5,8 @@ import java.util.Map;
 
 import android.app.Application;
 import android.content.Context;
-import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.view.Display;
-import android.view.WindowManager;
 
 import com.hzuhelper.utils.StringUtils;
 
@@ -19,7 +16,7 @@ import com.hzuhelper.utils.StringUtils;
  * @version 1.0
  * @created 2014-6-29
  */
-public class AppContext extends Application {
+public class AppContext extends Application{
 
     public static final int   NETTYPE_WIFI  = 0x01;
     public static final int   NETTYPE_CMWAP = 0x02;
@@ -39,23 +36,8 @@ public class AppContext extends Application {
     @Override
     public void onCreate(){
         super.onCreate();
-
         Thread.setDefaultUncaughtExceptionHandler(AppException.getAppExceptionHandler());
-        initScreenDisplay();
         appContext = this;
-    }
-
-    /**
-     * 初始化
-     */
-    private void initScreenDisplay(){
-        WindowManager wm = (WindowManager)this.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-
-        Point size = new Point();
-        display.getSize(size);
-        screenWidth = size.x;
-        screenHeight = size.y;
     }
 
     /**

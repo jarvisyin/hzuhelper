@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.hzuhelper.R;
 import com.hzuhelper.activity.BaseActivity;
 import com.hzuhelper.config.StaticData;
-import com.hzuhelper.database.CourseDB;
+import com.hzuhelper.database.table.CourseDB;
 import com.hzuhelper.model.receive.P6004;
 import com.hzuhelper.wedget.CourseDatetimePicker;
 import com.hzuhelper.wedget.CourseDatetimePicker.Init;

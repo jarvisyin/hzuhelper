@@ -1,13 +1,7 @@
 package com.hzuhelper.activity.chat.TweetListFragment;
 
-public class ALLTweetFragment {
+import com.hzuhelper.wedget.BaseFragment;
 
-    /**
-     * @param args
-     */
-    public static void main(String[] args){
-        // TODO Auto-generated method stub
-
-    }
+public class ALLTweetFragment extends BaseFragment{
 
 }

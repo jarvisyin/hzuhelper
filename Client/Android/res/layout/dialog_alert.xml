@@ -2,13 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#000000" >
+    android:background="#00000000" >
 
     <TextView
         android:id="@+id/message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
+        android:background="@drawable/dialog_alert_bg1"
         android:gravity="center"
         android:padding="15dp"
         android:text="ascascasc"
@@ -26,7 +26,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.0"
-            android:background="@drawable/btn_bg_white"
+            android:background="@drawable/dialog_alert_btn_left_bg"
             android:padding="10dp"
             android:text="@string/quxiao"
             android:textColor="@color/blue_light" />
@@ -41,7 +41,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.0"
-            android:background="@drawable/btn_bg_white"
+            android:background="@drawable/dialog_alert_btn_right_bg"
             android:padding="10dp"
             android:text="@string/queding"
             android:textColor="@color/blue_light" />

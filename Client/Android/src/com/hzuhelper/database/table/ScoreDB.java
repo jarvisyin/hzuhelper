@@ -1,4 +1,4 @@
-package com.hzuhelper.database;
+package com.hzuhelper.database.table;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.List;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.hzuhelper.database.DALHelper;
 import com.hzuhelper.model.receive.P6006;
 
 public class ScoreDB {
@@ -29,7 +30,7 @@ public class ScoreDB {
 	private ScoreDB() {}	
 
 	public static List<P6006> getList() {
-		SQLiteDatabase db = DAOHelper.getInstance().getReadableDatabase();
+		SQLiteDatabase db = DALHelper.getInstance().getReadableDatabase();
 		Cursor cursor = db.rawQuery("select * from " + TABLE_NAME
 				+ "  order by xn desc,xq desc", null);
 		List<P6006> sList = new ArrayList<P6006>();
@@ -56,13 +57,13 @@ public class ScoreDB {
 	}
 
 	public static void delete() {
-		SQLiteDatabase db = DAOHelper.getInstance().getWritableDatabase();
+		SQLiteDatabase db = DALHelper.getInstance().getWritableDatabase();
 		db.execSQL("delete from " + TABLE_NAME);
 		db.close();
 	}
 
 	public static void save(P6006 model) {
-		SQLiteDatabase db = DAOHelper.getInstance().getReadableDatabase();
+		SQLiteDatabase db = DALHelper.getInstance().getReadableDatabase();
 		db.execSQL(
 				"insert into " + TABLE_NAME + " (" + COLUMN_XN + ","
 						+ COLUMN_XQ + "," + COLUMN_KCMC + "," + COLUMN_KCLX
@@ -91,7 +92,7 @@ public class ScoreDB {
 	}
 
 	public static int count() {
-		SQLiteDatabase db = DAOHelper.getInstance().getReadableDatabase();
+		SQLiteDatabase db = DALHelper.getInstance().getReadableDatabase();
 		Cursor cursor = db.rawQuery("select count(*) from " + TABLE_NAME, null);
 		int count = 0;
 		if (cursor.moveToLast()) {

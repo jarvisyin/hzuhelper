@@ -1,4 +1,4 @@
-package com.hzuhelper.database;
+package com.hzuhelper.database.table;
 
 import java.util.Date;
 import java.util.LinkedList;
@@ -7,6 +7,7 @@ import java.util.List;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.hzuhelper.database.DALHelper;
 import com.hzuhelper.model.receive.P6004;
 import com.hzuhelper.utils.Common;
 
@@ -28,7 +29,7 @@ public class CourseDB {
 	private CourseDB() {}
 
 	public static void save(P6004 course) {
-		SQLiteDatabase db = DAOHelper.getInstance().getWritableDatabase();
+		SQLiteDatabase db = DALHelper.getInstance().getWritableDatabase();
 		db.execSQL(
 				"insert into " + TABLE_NAME + " (" + COLUMN_WEEKTIME + ","
 						+ COLUMN_DAYTIME + "," + COLUMN_COURSETIME1 + ","
@@ -47,20 +48,20 @@ public class CourseDB {
 	}
 
 	public static void delete(int id) {
-		SQLiteDatabase db = DAOHelper.getInstance().getWritableDatabase();
+		SQLiteDatabase db = DALHelper.getInstance().getWritableDatabase();
 		db.execSQL("delete from " + TABLE_NAME + " where " + COLUMN_ID + "=?",
 				new Object[] { id });
 		db.close();
 	}
 
 	public static void delete() {
-		SQLiteDatabase db = DAOHelper.getInstance().getWritableDatabase();
+		SQLiteDatabase db = DALHelper.getInstance().getWritableDatabase();
 		db.execSQL("delete from " + TABLE_NAME);
 		db.close();
 	}
 
 	public static void update(P6004 course) {
-		SQLiteDatabase db = DAOHelper.getInstance().getWritableDatabase();
+		SQLiteDatabase db = DALHelper.getInstance().getWritableDatabase();
 		db.execSQL(
 				"update " + TABLE_NAME + " set " + COLUMN_WEEKTIME + "=?,"
 						+ COLUMN_DAYTIME + "=?," + COLUMN_COURSETIME1 + "=?,"
@@ -79,7 +80,7 @@ public class CourseDB {
 	}
 
 	public static int count() {
-		SQLiteDatabase db = DAOHelper.getInstance().getReadableDatabase();
+		SQLiteDatabase db = DALHelper.getInstance().getReadableDatabase();
 		Cursor cursor = db.rawQuery("select count(*) from " + TABLE_NAME, null);
 		int count = 0;
 		if (cursor.moveToLast()) {
@@ -94,7 +95,7 @@ public class CourseDB {
 		int WeekOfTerm = Common.getWeekOfTerm(date);
 		int mono = WeekOfTerm % 2 == 0 ? 2 : 1;
 		LinkedList<P6004> clist = new LinkedList<P6004>();
-		SQLiteDatabase db = DAOHelper.getInstance().getReadableDatabase();
+		SQLiteDatabase db = DALHelper.getInstance().getReadableDatabase();
 		Cursor cursor = db
 				.rawQuery(
 						"select * from " + TABLE_NAME + " where "
@@ -112,7 +113,7 @@ public class CourseDB {
 
 	public static LinkedList<P6004> getLinkedList() {
 		LinkedList<P6004> clist = new LinkedList<P6004>();
-		SQLiteDatabase db = DAOHelper.getInstance().getReadableDatabase();
+		SQLiteDatabase db = DALHelper.getInstance().getReadableDatabase();
 		Cursor cursor = db.rawQuery("select * from " + TABLE_NAME
 				+ " order by " + COLUMN_DAYTIME + "," + COLUMN_COURSETIME1,
 				null);
@@ -123,7 +124,7 @@ public class CourseDB {
 
 	public static List<P6004> getList(String cmd) {
 		LinkedList<P6004> clist = new LinkedList<P6004>();
-		SQLiteDatabase db = DAOHelper.getInstance().getReadableDatabase();
+		SQLiteDatabase db = DALHelper.getInstance().getReadableDatabase();
 		Cursor cursor = db.rawQuery("select * from " + TABLE_NAME + " where "
 				+ cmd + " order by " + COLUMN_DAYTIME + ","
 				+ COLUMN_COURSETIME1, null);
@@ -133,7 +134,7 @@ public class CourseDB {
 	}
 
 	public static P6004 getModel(int id) {
-		SQLiteDatabase db = DAOHelper.getInstance().getReadableDatabase();
+		SQLiteDatabase db = DALHelper.getInstance().getReadableDatabase();
 		Cursor cursor = db.rawQuery("select * from " + TABLE_NAME + " where "
 				+ COLUMN_ID + "=?", new String[] { String.valueOf(id) });
 		P6004 model;

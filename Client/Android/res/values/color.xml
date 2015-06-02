@@ -9,6 +9,13 @@
     <color name="colorF5F5F5">#F5F5F5</color>
     <color name="colorFF9A00">#FF9A00</color>
     <color name="color707070">#707070</color>
+
+    <!--  -->
+    <color name="dialog_alert_bg1">#d0ffffff</color>
+    <color name="dialog_alert_bg2">#d0f0f0f0</color>
+    <color name="dialogWindowBackground">#50000000</color>
+  
+    <!--  -->
     <color name="green_light">#99cc00</color>
     <color name="green_dark">#669900</color>
     <color name="orange_light">#ffbb33</color>

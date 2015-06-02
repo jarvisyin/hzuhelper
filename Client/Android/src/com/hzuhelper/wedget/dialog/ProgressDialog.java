@@ -1,4 +1,4 @@
-package com.hzuhelper.wedget;
+package com.hzuhelper.wedget.dialog;
 
 import com.hzuhelper.R;
 

@@ -18,7 +18,7 @@ import com.hzuhelper.activity.BaseActivity;
 import com.hzuhelper.activity.chat.TweetList;
 import com.hzuhelper.adapter.ScoreAdapter;
 import com.hzuhelper.config.StaticValues;
-import com.hzuhelper.database.ScoreDB;
+import com.hzuhelper.database.table.ScoreDB;
 import com.hzuhelper.model.receive.P6006;
 
 public class List extends BaseActivity{

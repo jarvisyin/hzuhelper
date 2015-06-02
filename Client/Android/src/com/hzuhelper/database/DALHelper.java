@@ -5,23 +5,25 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.hzuhelper.AppContext;
+import com.hzuhelper.database.table.CourseDB;
+import com.hzuhelper.database.table.ScoreDB;
 
-public class DAOHelper extends SQLiteOpenHelper{
+public class DALHelper extends SQLiteOpenHelper{
 
-    private static DAOHelper helper;
+    private static DALHelper helper;
 
-    public static DAOHelper getInstance(){
+    public static DALHelper getInstance(){
         if (helper==null) {
-            synchronized (DAOHelper.class) {
+            synchronized (DALHelper.class) {
                 if (helper==null) {
-                    helper = new DAOHelper(AppContext.getAppContext(),"HzuHelper.db",1);
+                    helper = new DALHelper(AppContext.getAppContext(),"HzuHelper.db",1);
                 }
             }
         }
         return helper;
     }
 
-    private DAOHelper(Context context,String DBname,int DBversoin){
+    private DALHelper(Context context,String DBname,int DBversoin){
         super(context, DBname, null, DBversoin);
     }
 

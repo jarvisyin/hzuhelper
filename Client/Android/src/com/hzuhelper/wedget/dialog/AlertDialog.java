@@ -1,10 +1,10 @@
-package com.hzuhelper.wedget;
+package com.hzuhelper.wedget.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -27,13 +27,13 @@ public class AlertDialog extends Dialog implements android.view.View.OnClickList
     }
 
     private void init(){
-        View View = LayoutInflater.from(getContext()).inflate(R.layout.dialog_alert,null);
-        message = (TextView)View.findViewById(R.id.message);
-        btnLeft = (Button)View.findViewById(R.id.btn_left);
-        btnRight = (Button)View.findViewById(R.id.btn_right);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_alert,null);
+        message = (TextView)view.findViewById(R.id.message);
+        btnLeft = (Button)view.findViewById(R.id.btn_left);
+        btnRight = (Button)view.findViewById(R.id.btn_right);
         btnLeft.setOnClickListener(this);
         btnRight.setOnClickListener(this);
-        setContentView(View);
+        setContentView(view,new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
     }
 
     public void setMessage(CharSequence text){

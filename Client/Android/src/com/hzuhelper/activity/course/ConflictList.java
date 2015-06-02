@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.hzuhelper.R;
 import com.hzuhelper.activity.BaseActivity;
 import com.hzuhelper.adapter.CourseAdapter;
-import com.hzuhelper.database.CourseDB;
+import com.hzuhelper.database.table.CourseDB;
 import com.hzuhelper.model.receive.P6004;
 
 public class ConflictList extends BaseActivity implements OnClickListener{
